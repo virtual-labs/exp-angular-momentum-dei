@@ -1,39 +1,115 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "version": 2,
+    "questions": [
+        {
+            "question": "Which principle governs the behavior of angular momentum in Experiment 8?",
+            "answers": {
+                "a": "Law of Gravitation",
+                "b": "Conservation of Energy",
+                "c": "Conservation of Angular Momentum",
+                "d": "Newton's First Law"
+            },
+            "correctAnswer": "c",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "What is the angular momentum of a rotating body proportional to?",
+            "answers": {
+                "a": "Its mass only",
+                "b": "Its radius only",
+                "c": "Its angular velocity only",
+                "d": "Both its mass and angular velocity"
+            },
+            "correctAnswer": "d",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "If there is no net external torque acting on a system, what happens to its angular momentum?",
+            "answers": {
+                "a": "It decreases",
+                "b": "It increases",
+                "c": "It remains constant",
+                "d": "It becomes zero"
+            },
+            "correctAnswer": "c",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "How is the moment of inertia of a rotating body defined?",
+            "answers": {
+                "a": "The resistance of an object to rotational motion",
+                "b": "The product of mass and velocity",
+                "c": "The product of force and distance",
+                "d": "The product of mass and radius squared"
+            },
+            "correctAnswer": "d",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Which of the following factors affect the angular momentum of a rotating body?",
+            "answers": {
+                "a": "Mass and velocity",
+                "b": "Velocity and radius",
+                "c": "Mass and torque",
+                "d": "Force and distance"
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "What is the condition for the conservation of angular momentum in a system?",
+            "answers": {
+                "a": "Net torque must be zero",
+                "b": "Net force must be zero",
+                "c": "Net velocity must be constant",
+                "d": "Net kinetic energy must be conserved"
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Which of the following actions might lead to a change in angular momentum?",
+            "answers": {
+                "a": "Applying a constant torque",
+                "b": "Increasing the mass of the system",
+                "c": "Reducing the radius of rotation",
+                "d": "Keeping the system isolated from external influences"
+            },
+            "correctAnswer": "c",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "What parameter is typically used to calculate the percentage difference in angular momentum?",
+            "answers": {
+                "a": "Moment of inertia",
+                "b": "Initial and final angular velocities",
+                "c": "Length of the rotating body",
+                "d": "Angular acceleration"
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "What is the primary purpose of aligning the dropped object over the axis of rotation in Experiment 8?",
+            "answers": {
+                "a": "To reduce air resistance",
+                "b": "To minimize friction between the disks",
+                "c": "To ensure accurate measurement of angular velocity",
+                "d": "To balance the system"
+            },
+            "correctAnswer": "c",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Which of the following statements best describes the conservation of angular momentum?",
+            "answers": {
+                "a": "Angular momentum is transferred between objects in a closed system.",
+                "b": "The total angular momentum of a system remains constant if no external torque acts on it.",
+                "c": "Angular momentum increases when the moment of inertia decreases.",
+                "d": "Angular momentum depends only on the mass of the rotating object."
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
+        }
+    ]
 }
