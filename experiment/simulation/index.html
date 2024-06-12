@@ -1,13 +1,214 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+<html lang="en">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONSERVATION OF ANGULAR MOMENTUM</title>
+</head>
+
+<body>
+    <div id="parentContainer">
+        <div id="container">
+            <div id="header">
+                <h3>CONSERVATION OF ANGULAR MOMENTUM</h3>
+            </div>
+
+
+
+            <div id="simulation">
+                <div id="leftPane">
+                    <div class="mass_object1">• Mass of Disc, M (kg) </div>
+                    <div id="slider_mass1">
+                        0.2<input type="range" class="range" id="currentmass1" min="0.2" max="1" value="0" step="0.2"
+                            oninput="showMass(this.value)" onchange="showMass(this.value)">1
+                    </div>
+                    <div id="initialMassValue1">0.2</div>
+
+                    <div class="radius_object1">• Radius of Disc (m) </div>
+                    <div id="disc_radius1">
+                        0.1<input type="range" class="range" id="currentradius1" min="0.1" max="0.25" value="0"
+                            step="0.05" oninput="showRadius(this.value)" onchange="showRadius(this.value)">0.25
+                    </div>
+                    <div id="initialRadiusValue1">0.1</div>
+
+                    <div class="angVelocity">• Angular Velocity of spin (rad/s)</div>
+                    <div id="angVelocity">
+                        20<input type="range" class="range" id="currentAngVel" min="20" max="40" value="0" step="10"
+                            oninput="showAngVel(this.value)" onchange="showAngVel(this.value)">40
+                    </div>
+                    <div id="initialAngVel">20</div>
+
+
+                    <div class="typeOfObject">• Select the object</div>
+                    <select id="currentObj">
+                        <option value="rectangle">Rectangular Bar</option>
+                        <option value="disc">Circular Disc</option>
+                        <option value="ring">Circular Ring</option>
+
+                    </select>
+
+                    
+                    <div class="initial_ObjectMass">
+                        <form name="Form" onsubmit="return validateForm()" >• Mass of the Object:     
+                           <input type="text" id="massText" name="massValue">
+                        </form>
+                    </div>
+
+                    <form id="rectangularBarForm" onsubmit="return validateForm()">
+                    <div id="rectangularBar" class="hidden">
+                        <label for="rectangularWidth">• Width (between 0.02 and 0.05):</label>
+                        <input type="text" id="rectangularWidth" min="0" max="100"><br>
+                        <label for="rectangularHeight">• Height (between 0.07 and 0.1):</label>
+                        <input type="text" id="rectangularHeight" min="0" max="100"><br>
+                    </div>
+                    <div id="circularRing" class="hidden">
+                        <label for="ringInnerRadius">• Inner Radius (between 0.02 and 0.05):</label>
+                        <input type="text" id="ringInnerRadius"><br>
+                        <label for="ringOuterRadius">• Outer Radius (between 0.07 and 0.1):</label>
+                        <input type="text" id="ringOuterRadius"><br>
+                    </div>
+                    
+                    <div id="circularDisc" class="hidden">
+                        <label for="discRadius">• Radius(between 0.07 and 0.1):</label>
+                        <input type="text" id="discRadius"><br>
+                    </div>
+
+                </form>
+
+
+
+                    <div style="display: flex">
+                        <div style="padding-left: 20%;">Lock : </div>
+                        <input type="checkbox" id="lockCheckbox" value="Lock" onclick="lock()">
+                    </div>
+
+                    <div><span id="lockPopUp" ></span></div>
+
+
+                </div>
+                <div id="middlePane">
+                    <canvas id="myCanvas" width="810px" height="490px"></canvas>
+                </div>
+                <div id="rightPane">
+                    <div class="controls">
+                        <div class="control_heading"><b>Controls:-</b></div>
+                        <div class="play">Release
+                            <button type="play" id="playButton">
+                                <img src="images/play.png" onclick="play()" />
+                            </button>
+                        </div>
+
+
+                        <div class="reset">Reset
+                            <button type="reset" id="resetButton">
+                                <img src="images/reset.png" onclick="reset()" />
+                            </button>
+                        </div>
+
+                        <div class="drop">Drop Object
+                            <button type="drop" id="dropButton" >
+                                <img src="images/drop.png" onclick="drop()" />
+                                <!-- <img src="images/drop.png"  /> -->
+
+                            </button>
+                        </div>
+                        <div id="stopwatch">00:00:000</div>
+                    </div>
+
+                     <a class="button-table1" href="#popup"><span></span>Obervation Table</a>
+
+                    <div id="popup" class="overlay">
+                        <div class="popup">
+                          <h2 style="text-align: center; text-decoration: solid; text-decoration: underline;">Obervation Table </h2>
+                          <a class="close" href="#">&times;</a>
+                          <div class="content">
+                            <b>Object 1 : Base Disc</b>
+                            <br>
+                          Mass of the object <b>M</b>  = <span id="baseDisc_Mass">0</span> kg
+                            <br>
+                            Radius of the base disc <b>R</b>  = <span id="baseDisc_radius">0</span> m
+                            <br>
+                            Mass moment of inertia of the base disc <b>I</b>  = <span id="baseDisc_inertia">0</span> 
+                    <br><br>
+                    
+                    <div id="rectangularPlate_Table" class="hidden">
+                        <b>Object 2 : Rectangular Plate </b>
+                        <br>
+                        Mass of the plate <b>M</b>  = <span id="plate_Mass">0</span> kg
+                        <br>
+                        Length of the plate <b>L</b>  = <span id="plate_Legnth">0</span> cm
+                        <br>
+                        Width of the plate <b>B</b>  = <span id="plate_Width">0</span> cm
+                        <br>
+                        Mass moment of inertia of the plate <b>I</b>  = <span id="plate_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+                    <div id="topDisc_Table" class="hidden">
+                        <b>Object 2 : Top Disc</b>
+                        <br>
+                        Mass of the disc <b>M</b>  = <span id="disc_Mass">0</span> kg
+                        <br>
+                        Radius of the base disc <b>R</b>  = <span id="disc_Radius">0</span> cm
+                        <br>
+                        Mass moment of inertia of the top disc <b>I</b>  = <span id="disc_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+
+                    <div id="annularRing_Table" class="hidden">
+                        <b>Object 2 : Top Disc</b>
+                        <br>
+                        Mass of the annular ring <b>M</b>  = <span id="ring_Mass">0</span> kg
+                        <br>
+                        Outer radius of the annular ring <b>R<sub>o</sub></b>  = <span id="ring_OuterRadius">0</span> cm
+                        <br>
+                        Inner radius of the annular ring<b>R<sub>i</sub></b>  = <span id="ring_InnerRadius">0</span> cm
+                        <br>
+                        Mass moment of inertia of the annular ring <b>I</b>  = <span id="ring_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+
+                          </div><br>
+                          <table>
+                            <tr>
+                              <th>Initial angular velocity 𝜔<sub>i</sub></th>
+                              <th>Final angular velocity 𝜔<sub>f</sub></th>
+                              <th>Initial angular momentum L<sub>initial</sub></th>
+                              <th>Final angular momentum L<sub>final</sub></th>
+                              <th>Percentage Difference</th>
+                    
+                              
+                            <tr>
+                              <td><span id="initialAngular_Vel">0</span></td>
+                              <td><span id="finalAngular_Vel">0</span></td>
+                              <td><span id="initialAngular_Momentum">0</span></td>
+                              <td><span id="initialAngular_Momentum">0</span></td>
+                              <td><span id="percentage_difference">0</span></td>
+                            </tr>
+                    
+                            </tr>
+                          </table><br>
+                    
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <div id="copyright"
+    title="Developer : Harsh Pathak and Aysha,Subject Expertise : Mr.Jinshad.U, Dayalbagh Educational Instiute,Agra ">
+  </div>
+  <div id="Developer_information" title="Developer Name:
+               1.Harsh Pathak
+                 (06hpathak@gmail.com)
+               2.Aysha
+                 (satsangiaysha@gmail.com)
+  Subject Expertise : Mr.Jinshad.U
+  Instiute Name: Dayalbagh Educational Instiute, Agra">
+  </div>
 </body>
+
 </html>
+
