@@ -8,8 +8,8 @@
 
 ### About the Experiment 
 
-Experiment to validate the conservation of linear momentum and conservation of energy as applied to the collision of
-objects
+To validate the conservation of angular momentum based on one-dimensional inelastic collisions
+between rotating bodies such as disks, rings, and plates
 <b>Name of Developer | <b> Mohd. Sharique Ahmad
 :--|:--|
 <b> Institute | <b>  Dayalbagh Educational Institute
