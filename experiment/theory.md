@@ -6,13 +6,12 @@ The study of pendulums provides insight into the principles of rotational dynami
 
 A simple pendulum is a theoretical model consisting of a point mass (called the bob) suspended from a fixed point by a weightless, inextensible string or rod. The bob is free to swing back and forth under the influence of gravity. The motion of the simple pendulum can be described as harmonic motion, particularly for small angular displacements where the motion approximates simple harmonic motion.
 
-<img align="right"  src="images/Theory_1.png">
 
 ## Period of a Simple Pendulum:
 
 For small angular displacements, the period 𝑇 of a simple pendulum is given by:
 
-![](images/Theory_1.png) 
+<img align="right"  src="images/Theory_1.png">
 
 
 The net torque is proportional to the angular acceleration α ⃗ of the body and shall exist during the entire time the torque acts. The equation is given as
@@ -52,26 +51,30 @@ Newton's second law gives the equation of motion for rotational systems for rota
 
 Where α is the angular acceleration. For small displacements:
   α=(∂^2 θ)/(∂t^2 ) 
-
-Rearranging this equation:
+  
+Substituting the torque expression for torque and angular acceleration in eq(ii):
 
 <img align="right"  src="images/Theory_7.png">
 
+Rearranging this equation:
+
+<img align="right"  src="images/Theory_8.png">
+
 This is a simple harmonic motion equation of the form:
-
-<img align="right"  src="images/Theory_8.png">
-
-Comparing with eq(iv), we obtain 
-
-<img align="right"  src="images/Theory_8.png">
-
-The period T of the pendulum is related to the angular frequency by:
 
 <img align="right"  src="images/Theory_9.png">
 
-So, For a simple pendulum, the known period T is also given by:
+Comparing with eq(iv), we obtain 
 
 <img align="right"  src="images/Theory_10.png">
+
+The period T of the pendulum is related to the angular frequency by:
+
+<img align="right"  src="images/Theory_11.png">
+
+So, For a simple pendulum, the known period T is also given by:
+
+<img align="right"  src="images/Theory_12.png">
 
 ## Compound Pendulum:
 
@@ -89,7 +92,7 @@ h is the distance from the pivot to the center of mass.
 
 The period T of a compound pendulum can be used to find the moment of inertia. The period of oscillation for small angles is given by:
 
-<img align="right"  src="images/Theory_11.png">
+<img align="right"  src="images/Theory_13.png">
 
  where:
 𝐼 is the mass moment of inertia about the pivot.
@@ -102,15 +105,15 @@ L is the distance from the pivot to the center of mass.
 To verify the expression for I, consider the dynamics of the compound pendulum.
 As, we already obtained the period T of the pendulum is related to the angular frequency :
 
-<img align="right"  src="images/Theory_12.png">
+<img align="right"  src="images/Theory_14.png">
 
 By solving this equation for I:
 
-<img align="right"  src="images/Theory_13.png">
+<img align="right"  src="images/Theory_15.png">
 
 ## Moment of Inertia about the Center of Mass:
 
-<img align="right"  src="images/Theory_14.png">
+<img align="right"  src="images/Theory_16.png">
 
 
 
