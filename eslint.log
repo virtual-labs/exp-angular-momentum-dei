@@ -1,0 +1,38 @@
+
+/home/runner/work/exp-angular-momentum-dei/exp-angular-momentum-dei/experiment/simulation/js/script.js
+   88:10  warning  'showMass' is defined but never used                no-unused-vars
+   96:10  warning  'showRadius' is defined but never used              no-unused-vars
+  136:10  warning  'showAngVel' is defined but never used              no-unused-vars
+  143:10  warning  'lock' is defined but never used                    no-unused-vars
+  166:7   warning  'baseDisc_Mass' is not defined                      no-undef
+  167:7   warning  'baseDisc_radius' is not defined                    no-undef
+  171:7   warning  'baseDisc_inertia' is not defined                   no-undef
+  174:7   warning  'initialAngular_Vel' is not defined                 no-undef
+  296:10  warning  'initialAngularMomentum' is defined but never used  no-unused-vars
+  304:10  warning  'finalAngularMomentum' is defined but never used    no-unused-vars
+  307:35  warning  'time' is not defined                               no-undef
+  315:10  warning  'percentageDifference' is defined but never used    no-unused-vars
+  457:10  warning  'play' is defined but never used                    no-unused-vars
+  474:10  warning  'reset' is defined but never used                   no-unused-vars
+  511:10  warning  'drop' is defined but never used                    no-unused-vars
+  566:11  warning  'plate_Mass' is not defined                         no-undef
+  567:11  warning  'plate_Legnth' is not defined                       no-undef
+  568:11  warning  'plate_Width' is not defined                        no-undef
+  586:9   warning  'disc_Mass' is not defined                          no-undef
+  587:9   warning  'disc_Radius' is not defined                        no-undef
+  588:9   warning  'disc_inertia' is not defined                       no-undef
+  601:9   warning  'ring_Mass' is not defined                          no-undef
+  602:9   warning  'ring_OuterRadius' is not defined                   no-undef
+  603:9   warning  'ring_InnerRadius' is not defined                   no-undef
+  604:9   warning  'ring_inertia' is not defined                       no-undef
+  815:8   warning  'i' is not defined                                  no-undef
+  815:15  warning  'i' is not defined                                  no-undef
+  815:28  warning  'i' is not defined                                  no-undef
+  816:22  warning  'i' is not defined                                  no-undef
+  837:8   warning  'i' is not defined                                  no-undef
+  837:15  warning  'i' is not defined                                  no-undef
+  837:27  warning  'i' is not defined                                  no-undef
+  839:21  warning  'i' is not defined                                  no-undef
+
+✖ 33 problems (0 errors, 33 warnings)
+
