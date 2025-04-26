@@ -51,27 +51,27 @@
 
                     
                     <div class="initial_ObjectMass">
-                        <form name="Form" onsubmit="return validateForm()" >• Mass of the Object:     
+                        <form name="Form" onsubmit="return validateForm()" >• Mass of Object [kg] (0.5 - 1):     
                            <input type="text" id="massText" name="massValue">
                         </form>
                     </div>
 
                     <form id="rectangularBarForm" onsubmit="return validateForm()">
                     <div id="rectangularBar" class="hidden">
-                        <label for="rectangularWidth">• Width (between 0.02 and 0.05):</label>
+                        <label for="rectangularWidth">• Width [m] (0.02 - 0.05):</label>
                         <input type="text" id="rectangularWidth" min="0" max="100"><br>
-                        <label for="rectangularHeight">• Height (between 0.07 and 0.1):</label>
+                        <label for="rectangularHeight">• Height [m] (0.07 - 0.1):</label>
                         <input type="text" id="rectangularHeight" min="0" max="100"><br>
                     </div>
                     <div id="circularRing" class="hidden">
-                        <label for="ringInnerRadius">• Inner Radius (between 0.02 and 0.05):</label>
+                        <label for="ringInnerRadius">• Inner Radius [m] (0.02 - 0.05):</label>
                         <input type="text" id="ringInnerRadius"><br>
-                        <label for="ringOuterRadius">• Outer Radius (between 0.07 and 0.1):</label>
+                        <label for="ringOuterRadius">• Outer Radius [m] (0.07 - 0.1):</label>
                         <input type="text" id="ringOuterRadius"><br>
                     </div>
                     
                     <div id="circularDisc" class="hidden">
-                        <label for="discRadius">• Radius(between 0.07 and 0.1):</label>
+                        <label for="discRadius">• Radius [m] (0.07 - 0.1):</label>
                         <input type="text" id="discRadius"><br>
                     </div>
 
@@ -89,7 +89,8 @@
 
                 </div>
                 <div id="middlePane">
-                    <canvas id="myCanvas" width="810px" height="490px"></canvas>
+                    <canvas id="myCanvas" width="350px" height="500px"></canvas>
+                    <canvas id="graphCanvas" width="450px" height="500px"></canvas>
                 </div>
                 <div id="rightPane">
                     <div class="controls">
@@ -110,14 +111,40 @@
                         <div class="drop">Drop Object
                             <button type="drop" id="dropButton" >
                                 <img src="images/drop.png" onclick="drop()" />
-                                <!-- <img src="images/drop.png"  /> -->
+                              
 
                             </button>
                         </div>
-                        <div id="stopwatch">00:00:000</div>
+                        <span > Time: <span id="stopwatch">00:00:000</span></span>
+                        <div hidden id="warning"> Drop the Object </div>
                     </div>
 
-                     <a class="button-table1" href="#popup"><span></span>Obervation Table</a>
+                     <!-- <a  id="observation-button" class="button-table1" href="#popup"><span></span>Obervation Table</a> -->
+                     
+
+                     <button hidden id="showObservationsBtn">Show Observations</button>
+                     
+       <button hidden  id="download-graph">Download Graph</button>
+
+                     <div id="resultsModal">
+                        <div class="modal-content">
+                           <!-- Close Button -->
+                           <span id="closeResultsModal" class="close-button">&times;</span>
+                           <!-- Modal Header -->
+                           <h2 class="modal-title">Results and Observations</h2>
+                           <!-- Input Data Container -->
+                           <div id="inputDataContainer" class="input-data-container">
+                              <ul id="inputDataList"></ul>
+                           </div>
+                           <!-- Table Container -->
+                           <div id="resultsTableContainer" class="results-table-container">
+                              <!-- Table will be populated dynamically -->
+                           </div>
+                           <!-- Download Button -->
+                           <button id="download-btn" class="download-button" onclick="downloadResults()">Download Data</button>
+                    </div>
+
+
 
                     <div id="popup" class="overlay">
                         <div class="popup">
@@ -191,7 +218,11 @@
                           </table><br>
                     
                         </div>
-                      </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
         </div>
