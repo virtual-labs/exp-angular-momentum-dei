@@ -84,7 +84,7 @@ const slider_mass1 = document.getElementById("currentmass1"); // base disc mass
 const disc_radius1 = document.getElementById("currentradius1"); //base disc radius
 const angVelocity = document.getElementById("currentAngVel");
 const typeOfObject = document.getElementById("currentObj");
-const checkbox = document.querySelector("#lockCheckbox");
+const checkbox = document.getElementById("lockCheckbox");
 
 function showMass(newmass) {
   //get the element
@@ -159,23 +159,15 @@ function lock() {
       discRadiusTextBox.disabled = true;
 
       isLocked = true;
+
+    
+     document.getElementById("lockCheckbox").disabled = true;
+
+
       drawObjects();
 
-      // showing values of base disc in table
-      baseDisc_Mass.innerHTML = baseDisc_mass;
-      baseDisc_radius.innerHTML = baseDisc_Radius;
-      var exponent = Math.floor(Math.log10(Math.abs(baseDiscInteria))); // Get the exponent
-      var mantissa = baseDiscInteria / Math.pow(10, exponent); // Get the mantissa
-      var formattedNumber =
-        mantissa.toFixed(2) + " * 10<sup>" + exponent + "</sup>";
-      baseDisc_inertia.innerHTML = formattedNumber;
-
-      initialAngular_Vel.innerHTML = initialAngularVelocity;
-
-
-      window.alert("Please do not change tabs for the simulation to work properly otherwise it will face some errors")
-
-      document.getElementById("lockCheckbox").disabled = true;
+    
+      
 
 
     } else {
@@ -197,10 +189,18 @@ function lock() {
   });
 }
 
-function uncheckCheckbox(checkboxId) {
-  const checkbox = document.getElementById(checkboxId);
-  checkbox.checked = false;
+
+function handleCheckboxChange() {
+  if (checkbox.checked) {
+      alert('Please do not change the tab or window for the simulation to work properly.');
+  }
 }
+
+// Add listener ONCE
+checkbox.addEventListener('change', handleCheckboxChange);
+
+
+
 
 function drawSetUp() {
   ctx.lineWidth = 1;
@@ -496,7 +496,10 @@ function reset() {
   showObservationsBtn.hidden = true;
   document.getElementById("download-graph").hidden = true;
 
-  uncheckCheckbox("lockCheckbox");
+
+  
+
+  
   slider_mass1.disabled = false;
   disc_radius1.disabled = false;
   angVelocity.disabled = false;
@@ -519,6 +522,9 @@ function reset() {
 
 
   document.getElementById("lockCheckbox").disabled = false;
+  document.getElementById('lockCheckbox').checked = false;
+
+  document.getElementById('warning').hidden = true;
 
 
   elapsedTime = 0;
