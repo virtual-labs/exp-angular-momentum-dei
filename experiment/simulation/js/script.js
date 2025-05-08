@@ -140,64 +140,64 @@ function showAngVel(newVel) {
   display.innerHTML = newVel;
   initialAngularVelocity = Number(newVel);
 }
+
+
+
+
 function lock() {
-  if (validateForm() === false) {
-    uncheckCheckbox("lockCheckbox");
+  // Store checkbox reference
+  const checkbox = document.getElementById("lockCheckbox");
+  
+  if (validateForm() == false) {
+    checkbox.checked = false;
+    
+    return;
   }
-  checkbox.addEventListener("change", function () {
-    if (this.checked) {
-      slider_mass1.disabled = true;
-      disc_radius1.disabled = true;
-      angVelocity.disabled = true;
-      typeOfObject.disabled = true;
-
-      objectMassTextBox.disabled = true;
-      WidthTextBox.disabled = true;
-      HeightTextBox.disabled = true;
-      InnerRadiusTextBox.disabled = true;
-      OuterRadiusTextBox.disabled = true;
-      discRadiusTextBox.disabled = true;
-
-      isLocked = true;
-
-    
-     document.getElementById("lockCheckbox").disabled = true;
-
-
-      drawObjects();
-
-    
-      
-
-
-    } else {
-      slider_mass1.disabled = false;
-      disc_radius1.disabled = false;
-      angVelocity.disabled = false;
-      typeOfObject.disabled = false;
-
-      objectMassTextBox.disabled = false;
-      WidthTextBox.disabled = false;
-      HeightTextBox.disabled = false;
-      InnerRadiusTextBox.disabled = false;
-      OuterRadiusTextBox.disabled = false;
-      discRadiusTextBox.disabled = false;
-
-      isLocked = false;
-      drawObjects();
-    }
-  });
-}
-
-
-function handleCheckboxChange() {
+  
+  // Handle the current state immediately
   if (checkbox.checked) {
-      alert('Please do not change the tab or window for the simulation to work properly.');
+    // Disable all input elements
+    slider_mass1.disabled = true;
+    disc_radius1.disabled = true;
+    angVelocity.disabled = true;
+    typeOfObject.disabled = true;
+    objectMassTextBox.disabled = true;
+    WidthTextBox.disabled = true;
+    HeightTextBox.disabled = true;
+    InnerRadiusTextBox.disabled = true;
+    OuterRadiusTextBox.disabled = true;
+    discRadiusTextBox.disabled = true;
+    
+    isLocked = true;
+    checkbox.disabled = true; // Disable the checkbox itself
+    
+    // Show alert when locking
+    alert('Please do not change the tab or window for the simulation to work properly.');
+    
+    drawObjects();
+  } else {
+    // Enable all input elements
+    slider_mass1.disabled = false;
+    disc_radius1.disabled = false;
+    angVelocity.disabled = false;
+    typeOfObject.disabled = false;
+    objectMassTextBox.disabled = false;
+    WidthTextBox.disabled = false;
+    HeightTextBox.disabled = false;
+    InnerRadiusTextBox.disabled = false;
+    OuterRadiusTextBox.disabled = false;
+    discRadiusTextBox.disabled = false;
+    
+    isLocked = false;
+    drawObjects();
   }
 }
 
-// Add listener ONCE
-checkbox.addEventListener('change', handleCheckboxChange);
+// Set up the event listener for the checkbox only once (outside the lock function)
+document.addEventListener('DOMContentLoaded', function() {
+  const checkbox = document.getElementById("lockCheckbox");
+  checkbox.addEventListener("change", lock);
+});
 
 
 
@@ -373,7 +373,7 @@ function animate() {
       timeValues.push(elapsedTime / 1000);
 
       if (!isNaN(currentAngularVelocity)) {
-        velocityValues.push(currentAngularVelocity);
+        if (currentAngularVelocity >= 0)  velocityValues.push(currentAngularVelocity);
       }
 
       if (
@@ -469,6 +469,8 @@ function reset() {
   initialAngularVelocity = 20;
   baseDisc_mass = 0.2; // base disc mass
   baseDisc_Radius = 0.1;
+
+  showRadius(0.1)
 
   clearInterval(rotationInterval); // Stop rotation
   isRotating = false;
