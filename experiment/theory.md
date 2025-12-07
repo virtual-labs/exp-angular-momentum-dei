@@ -1,3 +1,7 @@
+## APPARATUS
+
+Rotary motion sensor, Rotational motion kit with accessories, level tube, vernier calipers, data logger/acquisition system, computer system.
+
 ## THEORY
 
 This experiment is designed to familiarize students with the concept of angular momentum and to validate the law of conservation of angular momentum.
