@@ -34,13 +34,13 @@ where:
 
 For a system of $N$ particles, each with position vector $\vec{r}_i$ and linear momentum $\vec{p}_i$, the total angular momentum about the fixed reference point is the vector sum of individual angular momenta:
 
-$$\vec{L}_{total} = \vec{L}_1 + \vec{L}_2 + \cdots + \vec{L}_N = \sum_{i=1}^N \vec{L}_i$$
+$$\vec{L}_{total} = \vec{L}\_1 + \vec{L}\_2 + \cdots + \vec{L}\_N = \sum\_{i=1}^N \vec{L}\_i$$
 
 ### Angular Momentum of a Rigid Body
 
 To develop the angular momentum expression for a rigid body, we model it as a system of particles with mass $m_i$ that undergo identical rotational motion about a fixed axis. The net angular momentum along the axis of rotation is:
 
-$$\vec{L} = \sum_{i=1}^N \vec{L}_i = \sum_{i=1}^N m_i (\vec{r}_i \times \vec{v}_i)$$
+$$\vec{L} = \sum\_{i=1}^N \vec{L}\_i = \sum\_{i=1}^N m\_i (\vec{r}\_i \times \vec{v}\_i)$$
 
 For rotational motion, the relationship between linear velocity and angular velocity is:
 
