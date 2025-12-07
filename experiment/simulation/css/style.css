@@ -501,4 +501,23 @@ td {
   }
 }
 
+.control-group {
+    display: flex;
+    flex-direction: column;   /* Forces two rows */
+    gap: 2px;
+    width: 280px;
+  }
 
+  .control-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+input[type="range"] {
+  width: 100px;   /* Adjust as needed */
+}
+
+[hidden] {
+  display: none !important;
+}

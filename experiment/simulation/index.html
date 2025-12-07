@@ -19,63 +19,88 @@
 
             <div id="simulation">
                 <div id="leftPane">
-                    <div class="mass_object1">• Mass of Disc, M (kg) </div>
-                    <div id="slider_mass1">
-                        0.2<input type="range" class="range" id="currentmass1" min="0.2" max="1" value="0" step="0.2"
-                            oninput="showMass(this.value)" onchange="showMass(this.value)">1
-                    </div>
-                    <div id="initialMassValue1">0.2</div>
 
-                    <div class="radius_object1">• Radius of Disc (m) </div>
-                    <div id="disc_radius1">
-                        0.1<input type="range" class="range" id="currentradius1" min="0.1" max="0.25" value="0"
-                            step="0.05" oninput="showRadius(this.value)" onchange="showRadius(this.value)">0.25
+                   <div class="control-group" id="mass-base-div">
+                    <span>Mass of Base Disc (kg)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.2" max="1"  id="mass-base" step="0.1" value="0.2"/>
+                        <span id="mass-base-text">0.2</span>
                     </div>
-                    <div id="initialRadiusValue1">0.1</div>
-
-                    <div class="angVelocity">• Angular Velocity of spin (rad/s)</div>
-                    <div id="angVelocity">
-                        20<input type="range" class="range" id="currentAngVel" min="20" max="40" value="0" step="10"
-                            oninput="showAngVel(this.value)" onchange="showAngVel(this.value)">40
                     </div>
-                    <div id="initialAngVel">20</div>
 
+                    <div class="control-group" id="radius-base-div">
+                    <span>Radius of Disc (m) </span>
+                    <div class="control-row">
+                        <input type="range" min="0.1" max="0.25"  id="radius-base" step="0.05" value="0.1"/>
+                        <span id="radius-base-text">0.1</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="velocity-base-div">
+                    <span>Angular Velocity of spin (rad/s) </span>
+                    <div class="control-row">
+                        <input type="range" min="20" max="40"  id="velocity-base" step="5" value="20"/>
+                        <span id="velocity-base-text">20</span>
+                    </div>
+                    </div>
 
                     <div class="typeOfObject">• Select the object</div>
-                    <select id="currentObj">
+                    <select id="currentObj" onchange="handleCurrObject()">
                         <option value="rectangle">Rectangular Bar</option>
                         <option value="disc">Circular Disc</option>
                         <option value="ring">Circular Ring</option>
 
                     </select>
 
-                    
-                    <div class="initial_ObjectMass">
-                        <form name="Form" onsubmit="return validateForm()" >• Mass of Object [kg] (0.5 - 1):     
-                           <input type="text" id="massText" name="massValue">
-                        </form>
+
+                    <div class="control-group" id="mass-object-div">
+                    <span>Mass of Object (kg)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.5" id="mass-object" max="1" step="0.1" value="0.5"/>
+                        <span id="mass-object-text">0.5</span>
+                    </div>
                     </div>
 
-                    <form id="rectangularBarForm" onsubmit="return validateForm()">
-                    <div id="rectangularBar" class="hidden">
-                        <label for="rectangularWidth">• Width [m] (0.02 - 0.05):</label>
-                        <input type="text" id="rectangularWidth" min="0" max="100"><br>
-                        <label for="rectangularHeight">• Height [m] (0.07 - 0.1):</label>
-                        <input type="text" id="rectangularHeight" min="0" max="100"><br>
+                    <div class="control-group" id="width-input-div">
+                    <span>Width (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.02" max="0.05" id="width-input" step="0.01" value="0.04"/>
+                        <span id="width-input-text">0.04</span>
                     </div>
-                    <div id="circularRing" class="hidden">
-                        <label for="ringInnerRadius">• Inner Radius [m] (0.02 - 0.05):</label>
-                        <input type="text" id="ringInnerRadius"><br>
-                        <label for="ringOuterRadius">• Outer Radius [m] (0.07 - 0.1):</label>
-                        <input type="text" id="ringOuterRadius"><br>
-                    </div>
-                    
-                    <div id="circularDisc" class="hidden">
-                        <label for="discRadius">• Radius [m] (0.07 - 0.1):</label>
-                        <input type="text" id="discRadius"><br>
                     </div>
 
-                </form>
+                    <div class="control-group" id="height-input-div">
+                    <span>Height (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="height-input" step="0.01" value="0.07"/>
+                        <span id="height-input-text">0.07</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="ir-input-div" hidden>
+                    <span>Inner Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.02" max="0.05" id="ir-input" step="0.01" value="0.03"/>
+                        <span id="ir-input-text">0.03</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="or-input-div" hidden>
+                    <span>Outer Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="or-input" step="0.01" value="0.08"/>
+                        <span id="or-input-text">0.08</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="radius-input-div" hidden>
+                    <span>Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="radius-input" step="0.01" value="0.08"/>
+                        <span id="radius-input-text">0.08</span>
+                    </div>
+                    </div>
+                
 
 
 
@@ -242,4 +267,3 @@
 </body>
 
 </html>
-

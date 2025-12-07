@@ -1,84 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Show the corresponding text box based on the initially selected value
-  switch (selectedValue) {
-    case "rectangle":
-      // Show the text box for rectangular bar
-      document.getElementById("rectangularBar").classList.remove("hidden");
-      // Show the content for rectangular plate in Observation Table
-      document
-        .getElementById("rectangularPlate_Table")
-        .classList.remove("hidden");
-
-      break;
-  }
-});
-
-document.getElementById("currentObj").addEventListener("change", function () {
-  var selectedValue = this.value;
-
-  // Hide all text boxes
-  document.getElementById("rectangularBar").classList.add("hidden");
-  document.getElementById("circularRing").classList.add("hidden");
-  document.getElementById("circularDisc").classList.add("hidden");
-
-  // Hide all object 2 (table)
-  document.getElementById("rectangularPlate_Table").classList.add("hidden");
-  document.getElementById("topDisc_Table").classList.add("hidden");
-  document.getElementById("annularRing_Table").classList.add("hidden");
-
-  // Show the corresponding text box based on the selected value
-  switch (selectedValue) {
-    case "rectangle":
-      // Show the text box for rectangular bar
-      document.getElementById("rectangularBar").classList.remove("hidden");
-      // Show the content for rectangular plate in Observation Table
-      document
-        .getElementById("rectangularPlate_Table")
-        .classList.remove("hidden");
-
-      break;
-    case "ring":
-      // Show the text box for circular ring
-      document.getElementById("circularRing").classList.remove("hidden");
-      // Show the content for circular ring in Observation Table
-      document.getElementById("annularRing_Table").classList.remove("hidden");
-
-      break;
-    case "disc":
-      // Show the text box for circular disc
-      document.getElementById("circularDisc").classList.remove("hidden");
-      // Show the content for circular disc in Observation Table
-      document.getElementById("topDisc_Table").classList.remove("hidden");
-
-      break;
-  }
-});
-
-var objectMassTextBox = document.getElementById("massText");
-var WidthTextBox = document.getElementById("rectangularWidth");
-var HeightTextBox = document.getElementById("rectangularHeight");
-var InnerRadiusTextBox = document.getElementById("ringInnerRadius");
-var OuterRadiusTextBox = document.getElementById("ringOuterRadius");
-var discRadiusTextBox = document.getElementById("discRadius");
-
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-var angle = 0;
-let RadiiCoordinate = 80;
-let XCoordFront = 70;
-let isRotating = false;
-let rotationInterval;
-let lineLength = 85; // Length of the rotating line
-let startTime = null;
-
-let xPos = XCoordFront; // Initial position of the vertical moving line
-let isMoving = false;
-let movementInterval;
-let stopwatchIntervalID;
-
-var xCoord = 100; // x coordinate of top view dropping object
-var yCoord = 40; //y coordinate of top view dropping object
-var rectDimension = 100; //  dimension to draw rectangular plate in canvas
+const getElement = (id) => {
+  return document.getElementById(id);
+};
 
 const slider_mass1 = document.getElementById("currentmass1"); // base disc mass
 const disc_radius1 = document.getElementById("currentradius1"); //base disc radius
@@ -86,19 +8,113 @@ const angVelocity = document.getElementById("currentAngVel");
 const typeOfObject = document.getElementById("currentObj");
 const checkbox = document.getElementById("lockCheckbox");
 
-function showMass(newmass) {
-  //get the element
-  var display = document.getElementById("initialMassValue1");
-  //show the amount
-  display.innerHTML = newmass;
-  baseDisc_mass = Number(newmass); // base disc mass
-}
-function showRadius(newRadius) {
-  //get the element
-  var display = document.getElementById("initialRadiusValue1");
-  //show the amount
-  display.innerHTML = newRadius;
-  baseDisc_Radius = Number(newRadius);
+var initialAngularVelocity = 20; // Initial angular velocity in radians per second
+var baseDisc_mass = 0.2; // base disc mass
+var baseDisc_Radius = 0.1;
+
+var objectMassInput = 0.5;
+var width = 0.04;
+var length = 0.07;
+var innerRadius = 0.03;
+var outerRadius = 0.08;
+var discRadius = 0.08;
+
+var shape = "rectangle";
+
+var object2_details = {
+  name: "rectangle",
+  mass: objectMassInput,
+  height: length,
+  width: width,
+  radius: discRadius,
+  inner_radius: innerRadius,
+  outer_radius: outerRadius,
+};
+
+// ---------------- SHAPE HANDLER -----------------
+const handleCurrObject = () => {
+  const selectBox = document.getElementById("currentObj");
+  shape = selectBox.value;
+  object2_details.name = shape;
+
+  // Hide all first
+  getElement("width-input-div").hidden = true;
+  getElement("height-input-div").hidden = true;
+  getElement("radius-input-div").hidden = true;
+  getElement("ir-input-div").hidden = true;
+  getElement("or-input-div").hidden = true;
+
+  // Mass always visible
+  getElement("mass-object-div").hidden = false;
+
+  // Show based on shape
+  if (shape === "rectangle") {
+    getElement("width-input-div").hidden = false;
+    getElement("height-input-div").hidden = false;
+  } else if (shape === "disc") {
+    getElement("radius-input-div").hidden = false;
+  } else if (shape === "ring") {
+    getElement("ir-input-div").hidden = false;
+    getElement("or-input-div").hidden = false;
+  }
+};
+
+// ---------------- INPUT BINDINGS -----------------
+
+const mass_object_input = getElement("mass-object");
+mass_object_input.addEventListener("input", () => {
+  objectMassInput = parseFloat(mass_object_input.value);
+  object2_details.mass = objectMassInput;
+  getElement("mass-object-text").innerText = mass_object_input.value;
+});
+
+const width_input = getElement("width-input");
+width_input.addEventListener("input", () => {
+  width = parseFloat(width_input.value);
+  object2_details.width = width;
+  getElement("width-input-text").innerText = width_input.value;
+});
+
+const height_input = getElement("height-input");
+height_input.addEventListener("input", () => {
+  length = parseFloat(height_input.value);
+  object2_details.height = length;
+  getElement("height-input-text").innerText = height_input.value;
+});
+
+const ir_input = getElement("ir-input");
+ir_input.addEventListener("input", () => {
+  innerRadius = parseFloat(ir_input.value);
+  object2_details.inner_radius = innerRadius;
+  getElement("ir-input-text").innerText = ir_input.value;
+});
+
+const or_input = getElement("or-input");
+or_input.addEventListener("input", () => {
+  outerRadius = parseFloat(or_input.value);
+  object2_details.outer_radius = outerRadius;
+  getElement("or-input-text").innerText = or_input.value;
+});
+
+const radius_input = getElement("radius-input");
+radius_input.addEventListener("input", () => {
+  discRadius = parseFloat(radius_input.value);
+  object2_details.radius = discRadius;
+  getElement("radius-input-text").innerText = radius_input.value;
+});
+
+const base_disc_mass_input = getElement("mass-base");
+base_disc_mass_input.addEventListener("input", () => {
+  baseDisc_mass = parseFloat(base_disc_mass_input.value);
+  getElement("mass-base-text").innerText = baseDisc_mass;
+});
+
+const base_radius_input = getElement("radius-base");
+base_radius_input.addEventListener("input", () => {
+  baseDisc_Radius = parseFloat(base_radius_input.value);
+  getElement("radius-base-text").innerText = baseDisc_Radius;
+
+  var newRadius = base_radius_input.value;
 
   if (newRadius == 0.1) {
     RadiiCoordinate = 80;
@@ -132,113 +148,136 @@ function showRadius(newRadius) {
   drawSetUp();
 
   drawRotatingLine(angle); // Draw initial line before rotation
-}
-function showAngVel(newVel) {
-  //get the element
-  var display = document.getElementById("initialAngVel");
-  //show the amount
-  display.innerHTML = newVel;
-  initialAngularVelocity = Number(newVel);
-}
+});
 
+const base_velocity_input = getElement("velocity-base");
+base_velocity_input.addEventListener("input", () => {
+  initialAngularVelocity = parseFloat(base_velocity_input.value);
+  getElement("velocity-base-text").innerText = initialAngularVelocity;
+});
 
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var angle = 0;
+let RadiiCoordinate = 80;
+let XCoordFront = 70;
+let isRotating = false;
+let rotationInterval;
+let lineLength = 85; // Length of the rotating line
+let startTime = null;
 
+let xPos = XCoordFront; // Initial position of the vertical moving line
+let isMoving = false;
+let movementInterval;
+let stopwatchIntervalID;
+
+var xCoord = 100; // x coordinate of top view dropping object
+var yCoord = 40; //y coordinate of top view dropping object
+var rectDimension = 100; //  dimension to draw rectangular plate in canvas
 
 function lock() {
   // Store checkbox reference
   const checkbox = document.getElementById("lockCheckbox");
-  
-  if (validateForm() == false) {
-    checkbox.checked = false;
-    
-    return;
-  }
-  
+
   // Handle the current state immediately
   if (checkbox.checked) {
-    // Disable all input elements
-    slider_mass1.disabled = true;
-    disc_radius1.disabled = true;
-    angVelocity.disabled = true;
-    typeOfObject.disabled = true;
-    objectMassTextBox.disabled = true;
-    WidthTextBox.disabled = true;
-    HeightTextBox.disabled = true;
-    InnerRadiusTextBox.disabled = true;
-    OuterRadiusTextBox.disabled = true;
-    discRadiusTextBox.disabled = true;
-    
     isLocked = true;
     checkbox.disabled = true; // Disable the checkbox itself
-    
+
     // Show alert when locking
-    alert('Please do not change the tab or window for the simulation to work properly.');
-    
+    alert(
+      "Please do not change the tab or window for the simulation to work properly."
+    );
+
+    console.log(
+      objectMassInput,
+      width,
+      length,
+      innerRadius,
+      outerRadius,
+      discRadius
+    );
+
     drawObjects();
+
+
+    getElement("mass-object").disabled = true;
+    getElement("width-input").disabled = true;
+    getElement("height-input").disabled = true;
+    getElement("ir-input").disabled = true;
+    getElement("or-input").disabled = true;
+    getElement("radius-input").disabled = true;
+
+    getElement("mass-base").disabled = true;
+    getElement("radius-base").disabled = true;
+    getElement("velocity-base").disabled = true;
+
+
+
   } else {
-    // Enable all input elements
-    slider_mass1.disabled = false;
-    disc_radius1.disabled = false;
-    angVelocity.disabled = false;
-    typeOfObject.disabled = false;
-    objectMassTextBox.disabled = false;
-    WidthTextBox.disabled = false;
-    HeightTextBox.disabled = false;
-    InnerRadiusTextBox.disabled = false;
-    OuterRadiusTextBox.disabled = false;
-    discRadiusTextBox.disabled = false;
-    
     isLocked = false;
+
+    getElement("mass-object").disabled = false;
+    getElement("width-input").disabled = false;
+    getElement("height-input").disabled = false;
+    getElement("ir-input").disabled = false;
+    getElement("or-input").disabled = false;
+    getElement("radius-input").disabled = false;
+
+    getElement("mass-base").disabled = false;
+    getElement("radius-base").disabled = false;
+    getElement("velocity-base").disabled = false;
     drawObjects();
   }
 }
 
 // Set up the event listener for the checkbox only once (outside the lock function)
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   const checkbox = document.getElementById("lockCheckbox");
   checkbox.addEventListener("change", lock);
 });
 
-
-
-
 function drawSetUp() {
+  if (RadiiCoordinate === undefined || XCoordFront === undefined) {
+    return;
+  }
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   ctx.lineWidth = 1;
 
-  //base top view
+  // ================= BASE TOP VIEW =================
   ctx.beginPath();
   ctx.fillStyle = "grey";
   ctx.fillRect(50, 0, 200, 200);
   ctx.strokeStyle = "black";
   ctx.strokeRect(50, 0, 200, 200);
 
-  //Object 1 disc
+  // ================= OBJECT 1 DISC (TOP VIEW) =================
   ctx.beginPath();
   ctx.arc(150, 100, RadiiCoordinate, 0, 2 * Math.PI);
   ctx.fillStyle = "black";
   ctx.fill();
-  //disc front view
+
+  // ================= DISC FRONT VIEW =================
   ctx.fillStyle = "black";
   ctx.fillRect(XCoordFront, 425, RadiiCoordinate * 2, 20);
 
-  //base front view
+  // ================= BASE FRONT VIEW =================
   ctx.beginPath();
   ctx.fillStyle = "grey";
   ctx.fillRect(50, 450, 200, 20);
   ctx.fillRect(50, 470, 20, 10);
   ctx.fillRect(230, 470, 20, 10);
 
-  //stand
+  // ================= STAND =================
   ctx.fillStyle = "grey";
   ctx.fillRect(145, 445, 10, 5);
   ctx.fillRect(147, 420, 6, 5);
 
+  // ================= MOTION =================
   drawMovingLine();
 }
-
-var initialAngularVelocity = 20; // Initial angular velocity in radians per second
-var baseDisc_mass = 0.2; // base disc mass
-var baseDisc_Radius = 0.1;
 
 var baseDiscInteria;
 
@@ -319,7 +358,7 @@ function drawMovingLine() {
 }
 
 function drawRotatingLine(angle) {
-  // ctx.clearRect(0, 0, canvas.width, canvas.legnth);
+  // ctx.clearRect(0, 0, canvas.width, canvas.length);
   drawSetUp();
   ctx.beginPath();
   ctx.strokeStyle = "green";
@@ -373,7 +412,8 @@ function animate() {
       timeValues.push(elapsedTime / 1000);
 
       if (!isNaN(currentAngularVelocity)) {
-        if (currentAngularVelocity >= 0)  velocityValues.push(currentAngularVelocity);
+        if (currentAngularVelocity >= 0)
+          velocityValues.push(currentAngularVelocity);
       }
 
       if (
@@ -436,13 +476,6 @@ function updateStopwatch() {
   document.getElementById("stopwatch").textContent = formattedTime;
 }
 
-
-
-
-
-
-
-
 function play() {
   var checkbox = document.getElementById("lockCheckbox");
   if (!checkbox.checked) {
@@ -470,8 +503,6 @@ function reset() {
   baseDisc_mass = 0.2; // base disc mass
   baseDisc_Radius = 0.1;
 
-  showRadius(0.1)
-
   clearInterval(rotationInterval); // Stop rotation
   isRotating = false;
   angle = 0;
@@ -498,80 +529,113 @@ function reset() {
   showObservationsBtn.hidden = true;
   document.getElementById("download-graph").hidden = true;
 
-
-  
-
-  
-  slider_mass1.disabled = false;
-  disc_radius1.disabled = false;
-  angVelocity.disabled = false;
-  typeOfObject.disabled = false;
-
-  slider_mass1.value = 0.2;
-  disc_radius1.value = 0.1;
-  angVelocity.value = 20;
-
-  document.getElementById("initialMassValue1").innerHTML = 0.2;
-  document.getElementById("initialRadiusValue1").innerHTML = 0.1;
-  document.getElementById("initialAngVel").innerHTML = 20;
-
-  document.getElementById("massText").value = "";
-  document.getElementById("rectangularWidth").value = "";
-  document.getElementById("rectangularHeight").value = "";
-  document.getElementById("ringInnerRadius").value = "";
-  document.getElementById("ringOuterRadius").value = "";
-  document.getElementById("discRadius").value = "";
-
-
   document.getElementById("lockCheckbox").disabled = false;
-  document.getElementById('lockCheckbox').checked = false;
+  document.getElementById("lockCheckbox").checked = false;
 
-  document.getElementById('warning').hidden = true;
-
+  document.getElementById("warning").hidden = true;
 
   elapsedTime = 0;
 
-  objectMassTextBox.disabled = false;
-  WidthTextBox.disabled = false;
-  HeightTextBox.disabled = false;
-  InnerRadiusTextBox.disabled = false;
-  OuterRadiusTextBox.disabled = false;
-  discRadiusTextBox.disabled = false;
+  // ---------------- RESET VALUES ----------------
+  objectMassInput = 0.5;
+  width = 0.04;
+  length = 0.07;
+  innerRadius = 0.03;
+  outerRadius = 0.08;
+  discRadius = 0.08;
+
+  initialAngularVelocity = 20;
+  baseDisc_mass = 0.2;
+  baseDisc_Radius = 0.1;
+
+  shape = "rectangle";
+
+  // ---------------- RESET MASTER OBJECT ----------------
+  object2_details = {
+    name: "rectangle",
+    mass: objectMassInput,
+    height: length,
+    width: width,
+    radius: discRadius,
+    inner_radius: innerRadius,
+    outer_radius: outerRadius,
+  };
+
+  // ---------------- RESET SLIDER VALUES ----------------
+  getElement("mass-object").value = objectMassInput;
+  getElement("width-input").value = width;
+  getElement("height-input").value = length;
+  getElement("ir-input").value = innerRadius;
+  getElement("or-input").value = outerRadius;
+  getElement("radius-input").value = discRadius;
+
+  getElement("mass-base").value = baseDisc_mass;
+  getElement("radius-base").value = baseDisc_Radius;
+  getElement("velocity-base").value = initialAngularVelocity;
+
+  // ---------------- RESET DISPLAY TEXT ----------------
+  getElement("mass-object-text").innerText = objectMassInput;
+  getElement("width-input-text").innerText = width;
+  getElement("height-input-text").innerText = length;
+  getElement("ir-input-text").innerText = innerRadius;
+  getElement("or-input-text").innerText = outerRadius;
+  getElement("radius-input-text").innerText = discRadius;
+
+  getElement("mass-base-text").innerText = baseDisc_mass;
+  getElement("radius-base-text").innerText = baseDisc_Radius;
+  getElement("velocity-base-text").innerText = initialAngularVelocity;
+
+  // SHOW INPUTS
+  getElement("mass-object").disabled = false;
+  getElement("width-input").disabled = false;
+  getElement("height-input").disabled = false;
+  getElement("ir-input").disabled = false;
+  getElement("or-input").disabled = false;
+  getElement("radius-input").disabled = false;
+
+  getElement("mass-base").disabled = false;
+  getElement("radius-base").disabled = false;
+  getElement("velocity-base").disabled = false;
+
+  // ---------------- RESET SHAPE DROPDOWN ----------------
+  getElement("currentObj").value = "rectangle";
+
+  // ---------------- RESET VISIBILITY ----------------
+  handleCurrObject(); // applies correct visibility for rectangle
+
+  RadiiCoordinate = 80;
+  XCoordFront = 70;
+  lineLength = 85;
+  xCoord = 100;
+  yCoord = 40;
+  rectDimension = 100;
+
+
+  drawSetUp();
+
+  drawRotatingLine(angle); // Draw initial line before rotation
 }
 
 var isObjectDrop = false;
 
 function drop() {
-
   var checkbox = document.getElementById("lockCheckbox");
   if (!checkbox.checked) {
     alert("Please lock the parameters first");
-  }
-  else {
-
+  } else {
     document.getElementById("warning").hidden = true;
 
     isObjectDrop = true;
     isLocked = false;
     var initialAngle = angle;
-    console.log('dropped')
+    console.log("dropped");
     document.getElementById("playButton").hidden = true;
     drawObjects(initialAngle);
-
   }
 }
 
-
-
-
-
-
-
-
-
-
 function dropObjects(angle) {
-  var selectedValue = document.getElementById("currentObj").value;
+  var selectedValue = shape;
 
   if (isObjectDrop) {
     // Call the corresponding function based on the selected value
@@ -579,7 +643,7 @@ function dropObjects(angle) {
       case "rectangle":
         drawRectangularBar(angle);
         // I_2 = plateInteria;
-        I_2 = inertia_RectangularPlate(objectMassInput, legnth, width);
+        I_2 = inertia_RectangularPlate(objectMassInput, length, width);
         break;
       case "ring":
         drawCircularRing();
@@ -600,7 +664,7 @@ function dropObjects(angle) {
 var isLocked = false;
 
 function drawObjects() {
-  var selectedValue = document.getElementById("currentObj").value;
+  var selectedValue = shape;
   if (isLocked) {
     var gradient = ctx.createRadialGradient(
       150,
@@ -628,14 +692,9 @@ function drawObjects() {
         //inertia of rectangular plate
         var plate_Inertia = inertia_RectangularPlate(
           objectMassInput,
-          legnth,
+          length,
           width
         );
-
-        //showing values in observation table
-        plate_Mass.innerHTML = objectMassInput;
-        plate_Legnth.innerHTML = legnth * 100;
-        plate_Width.innerHTML = width * 100;
 
         // Convert number to scientific notation
         var exponent = Math.floor(Math.log10(Math.abs(plate_Inertia))); // Get the exponent
@@ -686,112 +745,6 @@ function drawObjects() {
   }
 }
 
-var objectMassInput;
-var widthInput;
-var heightInput;
-var width;
-var legnth;
-
-var innerRadiusInput;
-var outerRadiusInput;
-var innerRadius;
-var outerRadius;
-
-var discRadiusInput;
-var discRadius;
-
-// disc_Mass.innerHTML = objectMassInput;
-// ring_Mass.innerHTML = objectMassInput;
-
-var selectedValue = document.getElementById("currentObj").value;
-
-function validateForm() {
-  objectMassInput = document.forms["Form"]["massValue"].value;
-  // let numericRegex = /^[0-1]+$/;                     // Regular expression
-
-  if (objectMassInput === "") {
-    alert("Mass of the object must be filled out");
-    return false;
-    // } else if (!numericRegex.test(objectMassInput)) {
-    //   alert("Please enter a valid mass (numeric value only between 0 to 1)");
-    //   return false;
-  } else if (objectMassInput < 0.5 || objectMassInput > 1) {
-    alert("Please enter mass between 0.5 to 1");
-    return false;
-  }
-
-  object2_details.mass = Number(objectMassInput);
-
-  var selectedValue = document.getElementById("currentObj").value;
-
-  switch (selectedValue) {
-    case "rectangle":
-      widthInput = document.getElementById("rectangularWidth");
-      heightInput = document.getElementById("rectangularHeight");
-      width = widthInput.value;
-      legnth = heightInput.value;
-
-      // Check if the values are within the specified range
-      if (
-        isNaN(width) ||
-        isNaN(legnth) ||
-        width < 0.02 ||
-        width > 0.05 ||
-        legnth < 0.07 ||
-        legnth > 0.1
-      ) {
-        alert(
-          "Please enter values between 0.02 and 0.05 for width and between 0.07 and 0.1 for legnth."
-        );
-        // Prevent further action if validation fails
-        return false;
-      }
-
-      object2_details.name = "rectangular plate";
-      object2_details.width = Number(width);
-      object2_details.height = Number(legnth);
-
-      break;
-    case "ring":
-      innerRadiusInput = document.getElementById("ringInnerRadius");
-      outerRadiusInput = document.getElementById("ringOuterRadius");
-      innerRadius = Number(innerRadiusInput.value);
-      outerRadius = Number(outerRadiusInput.value);
-
-      // Check if the values are within the specified range
-      if (
-        isNaN(innerRadius) ||
-        isNaN(outerRadius) ||
-        innerRadius < 0.02 ||
-        innerRadius > 0.05 ||
-        outerRadius < 0.07 ||
-        outerRadius > 0.1
-      ) {
-        alert("Please enter correct values");
-        // Prevent further action if validation fails
-        return false;
-      }
-
-      object2_details.name = "ring";
-      object2_details.inner_radius = Number(innerRadius);
-      object2_details.outer_radius = Number(outerRadius);
-
-      break;
-    case "disc":
-      discRadiusInput = document.getElementById("discRadius");
-      discRadius = discRadiusInput.value;
-      if (isNaN(discRadius) || discRadius < 0.07 || discRadius > 0.1) {
-        alert("Please enter correct values between 0.07 to 0.1");
-        // Prevent further action if validation fails
-        return false;
-      }
-
-      object2_details.name = "disc";
-      object2_details.radius = Number(discRadius);
-      break;
-  }
-}
-
 function inertia_RectangularPlate(mass, length, width) {
   var I = (mass * (length ** 2 + width ** 2)) / 12;
   return I;
@@ -806,32 +759,6 @@ function inertia_Ring(mass, innerRadius, outerRadius) {
   var I = (mass * (innerRadius ** 2 + outerRadius ** 2)) / 2;
   return I;
 }
-
-// function drawRectangularBar() {
-
-//   drawSetUp();
-
-//   ctx.beginPath();
-//   var gradient = ctx.createLinearGradient(xCoord, yCoord, xCoord, yCoord + rectDimension);
-
-//   // Define gradient colors and positions
-//   gradient.addColorStop(0, "#754369");          // Top color (dark grey)
-//   gradient.addColorStop(0.3, "#B567A2");        // Middle color (light grey)
-//   gradient.addColorStop(0.5, "#F58CDA");        // Middle color (light grey)
-//   gradient.addColorStop(1, "#754369");          // Bottom color (dark grey)
-
-//   // Draw the rectangular bar
-//   ctx.fillStyle = gradient;
-//   ctx.fillRect(xCoord, yCoord, rectDimension, rectDimension+20);
-
-//   gradient = ctx.createLinearGradient(XCoordFront + 5, 405, XCoordFront + 5, 425);
-//   gradient.addColorStop(0, "#754369");          // Top color (dark grey)
-//   gradient.addColorStop(0.5, "#B567A2");       // Middle color (light grey)
-//   gradient.addColorStop(1, "#754369");          // Bottom color (dark grey)
-//   ctx.fillStyle = gradient;
-//   ctx.fillRect(XCoordFront + 10, 405, RadiiCoordinate * 2 - 20, 20);
-
-// }
 
 function drawRectangularBar(angle) {
   drawSetUp();
@@ -977,71 +904,12 @@ var index1 = -1;
 var xBase = 430;
 var yBase = 50;
 
-// function drawAngularVelocityGraph() {
-//   ctx.lineWidth = 2;
-//   var startX = xBase; // Set the starting X-coordinate for the graph
-//   var startY = yBase; // Set the starting Y-coordinate for the graph
-//   var lastX= 0;
-//   var lastY= 0;
-//   // var verticalLineDrawn = false;
-
-//   var graphTime = (new Date().getTime() - startTime)/ 1000
-
-//   for (i = 1; i <= index1; i++) {
-//     // var graphTime1 = i / 200;
-//     lastX = startX + (40 / xIncrement * 3.5) * graphTime ;
-//     vel = calculateAngularVelocity(initialAngularVelocity, graphTime);
-//     lastY = startY + 40 * graphY - (40 / yIncrement) * vel;
-//   }
-
-//   ctx.beginPath();
-
-//   // Determine the starting x-coordinate
-//   var startVelX = isObjectDrop ? lastX : startX;
-
-//   // Determine the starting y-coordinate
-//   var startVelY =isObjectDrop ? lastY :startY + 40 * graphY - (40 / yIncrement) * initialAngularVelocity;
-
-//   ctx.moveTo(startVelX, startVelY);
-//   // console.log("startVelX  " +startVelX + "   startVelY   "+ startVelY);
-
-//   ctx.strokeStyle = "blue";
-//   var vel;
-
-//   for (i = 1; i <= index; i++) {
-//     // Draw the graph point
-//     // var graphTime = i / 200;
-//     if (isObjectDrop === true) {
-//       // var v = finalAngularVelocity(70*graphTime)
-//       // vel = calculateAngularVelocity(v, 70 * graphTime);
-//       vel = endAngularVelocity(graphTime);
-//       var b = startY + 40 * graphY - (40 / yIncrement) * vel;
-//       var a = lastX + (40 / xIncrement * 3.5) * graphTime;
-//       ctx.lineTo(a, b);
-//       console.log(vel)
-
-//     // console.log(vel);
-
-//       // console.log("a  "+ a + "   b  "+ b);
-//     } else {
-//       vel = calculateAngularVelocity(initialAngularVelocity, 70 * graphTime);
-//       var y = startY + 40 * graphY - (40 / yIncrement) * vel;
-//       var x = startX + (40 / xIncrement * 3.5) * graphTime;
-
-//       ctx.lineTo(x, y);
-//     // console.log("x " +x + "   y "+ y);
-
-//     }
-//   }
-//   ctx.stroke();
-// }
-
 function drawBlueLine(x1, y1, x2, y2) {
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
   ctx.strokeStyle = "blue";
-  ctx.lineWidth = 2; // Adjust line thickness if needed
+  ctx.lineWidth = 2;
   ctx.stroke();
 }
 
@@ -1129,96 +997,6 @@ function calculateGraphObservation(velocity, time) {
 
   return [xAxisValue, yAxisValue];
 }
-
-// function drawAxes(xAxisStart,yAxisStart,xNum,yNum,xOffset,xIncrement,yIncrement,yNumDecimals,xAxisTitle,yAxisTitle,y_AxisTitle,graphTitle) {
-//   // set background color for the graph
-//   ctx.fillStyle = "#ffd4d4";
-//   ctx.fillRect(xAxisStart, yAxisStart, 40 * xNum, 40 * yNum);
-
-//   var axisLabel = "";
-//   var axisValue = 0;
-
-//   // vertical grid lines
-//   ctx.lineWidth = 2;
-//   ctx.strokeStyle = "#888";
-
-//   for (var i = 0; i <= xNum; i++) {
-//     ctx.beginPath();
-//     ctx.moveTo(xAxisStart + 40 * i, yAxisStart);
-//     ctx.lineTo(xAxisStart + 40 * i, yAxisStart + 40 * yNum + 10);
-//     ctx.stroke();
-//     ctx.font = "10pt Calibri";
-//     ctx.fillStyle = "black";
-//     ctx.textAlign = "center";
-//     ctx.textBaseline = "middle";
-//     axisValue = xOffset + 20*xIncrement * i;
-//     axisLabel = axisValue.toFixed(0);
-
-//     ctx.fillText(axisLabel, xAxisStart + 40 * i, yAxisStart + 40 * yNum + 20);
-//   }
-
-//   // horizontal grid lines
-//   for (i = 0; i <= yNum; i++) {
-//     ctx.beginPath();
-//     ctx.moveTo(xAxisStart - 10, yAxisStart + 40 * i);
-//     ctx.lineTo(xAxisStart + 40 * xNum, yAxisStart + 40 * i);
-//     ctx.stroke();
-//   }
-//   for (i = 0; i <= yNum; i++) {
-//     ctx.font = "10pt Calibri";
-//     ctx.fillStyle = "black";
-//     ctx.textAlign = "center";
-//     ctx.textBaseline = "middle";
-//     axisValue = yIncrement * (yNum - i);
-//     axisLabel = axisValue.toFixed(yNumDecimals);
-//     ctx.fillText(axisLabel, xAxisStart - 20, yAxisStart + 40 * i);
-//   }
-
-//   // x-axis
-//   ctx.strokeStyle = "#000";
-//   ctx.lineWidth = 4;
-//   ctx.beginPath();
-//   ctx.moveTo(xAxisStart - 1, yAxisStart + 40 * yNum);
-//   ctx.lineTo(xAxisStart + 40 * xNum + 20, yAxisStart + 40 * yNum);
-//   ctx.stroke();
-//   ctx.moveTo(xAxisStart + 40 * xNum + 10, yAxisStart + 40 * yNum - 6);
-//   ctx.lineTo(xAxisStart + 40 * xNum + 20, yAxisStart + 40 * yNum);
-//   ctx.lineTo(xAxisStart + 40 * xNum + 10, yAxisStart + 40 * yNum + 6);
-//   ctx.lineJoin = "miter";
-//   ctx.stroke();
-//   ctx.font = "12pt Calibri";
-//   ctx.fillStyle = "black";
-//   ctx.textAlign = "left";
-//   ctx.fillText(xAxisTitle, xAxisStart + 40 * xNum + 24, yAxisStart + 40 * yNum);
-
-//   // y-axis
-
-//   ctx.strokeStyle = "#000";
-//   ctx.beginPath();
-//   ctx.moveTo(xAxisStart, yAxisStart - 15); // velocity vs time graph y axis
-//   ctx.lineTo(xAxisStart, yAxisStart + 40 * yNum);
-//   ctx.stroke();
-//   ctx.moveTo(xAxisStart - 6, yAxisStart - 10);
-//   ctx.lineTo(xAxisStart, yAxisStart - 20);
-//   ctx.lineTo(xAxisStart + 6, yAxisStart - 10);
-//   ctx.lineJoin = "miter";
-//   ctx.stroke();
-
-//   ctx.strokeStyle = "#000";
-//   ctx.textAlign = "center";
-//   //console.log("In the drawMotion function, with yAxisTitle = " + yAxisTitle + xAxisStart );
-
-//   ctx.font = "10pt Calibri";
-//   ctx.fillStyle = "black";
-//   ctx.fillText(yAxisTitle, xAxisStart - 25, yAxisStart - 35);
-//   ctx.fillText(y_AxisTitle, xAxisStart - 25, yAxisStart - 22);
-
-//   // graph title
-//   ctx.font = "bold 14pt Calibri";
-//   ctx.fillStyle = "black";
-//   ctx.textAlign = "center";
-//   ctx.fillText(graphTitle, xAxisStart + (40 * xNum) / 2, yAxisStart - 28);
-// }
 
 drawSetUp(); // Call drawSetUp initially to set up the canvas
 drawRotatingLine(angle); // Draw initial line before rotation
@@ -1378,85 +1156,81 @@ const closeResultsModal = document.getElementById("closeResultsModal");
 const resultsTableContainer = document.getElementById("resultsTableContainer");
 const inputDataContainer = document.getElementById("inputDataContainer");
 
-// Observations
-
-var object2_details = {
-  name: "",
-  mass: -1,
-  height: -1,
-  width: -1,
-  radius: -1,
-  inner_radius: -1,
-  outer_radius: -1,
-};
-
 // Function to display Disc details in inputDataContainer
 function showDiscDetails() {
   console.log(object2_details);
 
   function getScientificNotation(number) {
-    // Convert number to scientific notation
-    var exponent = Math.floor(Math.log10(Math.abs(number))); // Get the exponent
-    var mantissa = number / Math.pow(10, exponent); // Get the mantissa
+    var exponent = Math.floor(Math.log10(Math.abs(number)));
+    var mantissa = number / Math.pow(10, exponent);
     return mantissa.toFixed(2) + " * 10<sup>" + exponent + "</sup>";
   }
 
-  // Generate object2 details dynamically with units
+  // ✅ Shape-based allowed fields
+  let allowedKeys = ["mass"]; // mass always shown
+
+  if (shape === "rectangle") {
+    allowedKeys.push("width", "height");
+  } else if (shape === "disc") {
+    allowedKeys.push("radius");
+  } else if (shape === "ring") {
+    allowedKeys.push("inner_radius", "outer_radius");
+  }
+
+  // ✅ Generate Object 2 details dynamically (filtered)
   var object2DetailsHTML = "";
-  for (var key in object2_details) {
+
+  for (var key of allowedKeys) {
     if (object2_details[key] !== -1 && object2_details[key] !== "") {
       var formattedKey = key
         .replace(/_/g, " ")
         .replace(/\b\w/g, (char) => char.toUpperCase());
+
       var unit = "";
 
-      // Add units based on key
       switch (key) {
         case "mass":
           unit = "kg";
           break;
         case "radius":
-          unit = "m";
-          break;
         case "height":
-          unit = "m";
-          break;
         case "width":
-          unit = "m";
-          break;
-        case "density":
-          unit = "kg/m³";
-          break;
         case "inner_radius":
-          unit = "m";
-          break;
         case "outer_radius":
           unit = "m";
           break;
-        // Add more fields with units as needed
       }
 
-      object2DetailsHTML += `<p><strong>${formattedKey}:</strong> ${object2_details[key]} ${unit}</p>`;
+      object2DetailsHTML += `
+        <p><strong>${formattedKey}:</strong> ${object2_details[key]} ${unit}</p>
+      `;
     }
   }
 
+  // ✅ Final Output
   inputDataContainer.innerHTML = `
-  <h3>Object 1 Base Disc:</h3>
-  <div>
-      <p><strong>Mass of the Object (M):</strong> ${baseDisc_mass} kg</p>
-      <p><strong>Radius of the Base Disc (R):</strong> ${baseDisc_Radius} m</p>
-      <p><strong>MOI of Base Disc (I):</strong> ${getScientificNotation(
-        Inertia_BaseDisc()
-      )} kg·m²</p>
-  </div>
-  <h3>Object 2 Top Disc:</h3>
-  <div>
-      ${object2DetailsHTML || "<p>No details available</p>"}
-      <p><strong>MOI of Top Object (I):</strong> ${getScientificNotation(
-        I_2
-      )} kg·m²</p>
-  </div>
-`;
+    <h3>Object 1 Base Disc:</h3>
+    <div>
+        <p><strong>Mass of the Object (M):</strong> ${baseDisc_mass} kg</p>
+        <p><strong>Radius of the Base Disc (R):</strong> ${baseDisc_Radius} m</p>
+        <p><strong>MOI of Base Disc (I):</strong> ${getScientificNotation(
+          Inertia_BaseDisc()
+        )} kg·m²</p>
+    </div>
+
+    <h3>Object 2 (${shape.toUpperCase()}):</h3>
+    <div>
+        ${object2DetailsHTML || "<p>No details available</p>"}
+        <p><strong>MOI of Top Object (I):</strong> ${getScientificNotation(
+          I_2
+        )} kg·m²</p>
+    </div>
+
+    <div>
+       <p><strong>Theoretical Initial Angular Momentum :</strong>
+       ${(Inertia_BaseDisc() * initialAngularVelocity).toFixed(3)} kg·m²/s</p>
+    </div>
+  `;
 }
 
 // Function to populate the results table
@@ -1568,7 +1342,7 @@ document
   .getElementById("download-btn")
   .addEventListener("click", downloadResults);
 
-  document
+document
   .getElementById("download-graph")
   .addEventListener("click", function () {
     // Create a temporary canvas
