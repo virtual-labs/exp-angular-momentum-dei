@@ -38,17 +38,17 @@ $${\overrightarrow{L}}_{\text{total}} = {\overrightarrow{L}}_{1} + {\overrightar
 
 ### Angular Momentum of a Rigid Body
 
-To develop the angular momentum expression for a rigid body, we model it as a system of particles with mass $m_{i}$ that undergo identical rotational motion about a fixed axis. The net angular momentum along the axis of rotation is:
+To develop the angular momentum expression for a rigid body, we model it as a system of particles with mass $m_i$ that undergo identical rotational motion about a fixed axis. The net angular momentum along the axis of rotation is:
 
-$$\overrightarrow{L} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i} = \sum_{i = 1}^{N}(m_{i} \times ({\overrightarrow{r}}_{i} \times {\overrightarrow{v}}_{i}))$$
+$$\overrightarrow{L} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i} = \sum_{i = 1}^{N}(m_{i} \times (\vec{r}_{i} \times \vec{v}_{i}))$$
 
 For rotational motion, the relationship between linear velocity and angular velocity is:
 
-$${\overrightarrow{v}}_{i} = \overrightarrow{\omega} \times {\overrightarrow{r}}_{i}$$
+$$\vec{v}_{i} = \overrightarrow{\omega} \times \vec{r}_{i}$$
 
 Substituting this into the angular momentum equation:
 
-$$\overrightarrow{L} = \sum_{i = 1}^{N} m_{i} \times \{{\overrightarrow{r}}_{i} \times (\overrightarrow{\omega} \times {\overrightarrow{r}}_{i})\}$$
+$$\overrightarrow{L} = \sum_{i = 1}^{N} m_{i} \times \{\vec{r}_{i} \times (\overrightarrow{\omega} \times \vec{r}_{i})\}$$
 
 Using vector algebra, this simplifies to:
 
@@ -92,21 +92,21 @@ Note that the **total angular momentum L is conserved**. Individual angular mome
 
 The experiment uses a base solid disk that is free to rotate about a vertical spindle. A rotary motion sensor records the disk's angular velocity. The base disk is spun and another object (disk, ring, or plate) is carefully dropped onto it, resulting in a change of angular velocity. The initial and final angular velocities are used to validate conservation of angular momentum.
 
-If $\omega_{i}$ and $\omega_{f}$ denote the angular velocities just before and after the drop respectively, the initial and final angular momenta are:
+If $\omega_i$ and $\omega_f$ denote the angular velocities just before and after the drop respectively, the initial and final angular momenta are:
 
 **Initial angular momentum** (base disk only):
 
-$$L_{\text{initial}} = I_{\text{base}}\omega_{i}$$
+$$L_{\text{initial}} = I_{\text{base}}\omega_i$$
 
 **Final angular momentum** (base disk + dropped object combined):
 
-$$L_{\text{final}} = (I_{\text{base}} + I_{\text{dropped}})\omega_{f}$$
+$$L_{\text{final}} = (I_{\text{base}} + I_{\text{dropped}})\omega_f$$
 
 According to conservation of angular momentum:
 
 $$L_{\text{initial}} = L_{\text{final}}$$
 
-$$I_{\text{base}}\omega_{i} = (I_{\text{base}} + I_{\text{dropped}})\omega_{f}$$
+$$I_{\text{base}}\omega_i = (I_{\text{base}} + I_{\text{dropped}})\omega_f$$
 
 <div align="center">
 <img src="images/t9.png" style="max-width:100%; height:auto;">
@@ -123,4 +123,4 @@ MathJax = {
   }
 };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
