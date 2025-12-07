@@ -110,6 +110,28 @@
             },
             "correctAnswer": "b",
             "difficulty": "beginner"
-        }
+        },
+        {
+        "question": "In Experiment 8, a base disk with moment of inertia I_base = 0.0125 kg·m² rotates at ω_i = 18.5 rad/s. An annular ring with I_ring = 0.0045 kg·m² is dropped onto it. What is the final angular velocity after collision using conservation of angular momentum?",
+        "answers": {
+          "a": "13.2 rad/s",
+          "b": "13.6 rad/s",
+          "c": "14.1 rad/s",
+          "d": "15.5 rad/s"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+      },
+      {
+        "question": "Consider two identical disks with the same angular momentum. Disk A rotates slowly with large moment of inertia, while Disk B rotates quickly with small moment of inertia. Which statement is correct?",
+        "answers": {
+          "a": "Disk A has greater angular velocity than Disk B",
+          "b": "Disk B has greater moment of inertia than Disk A",
+          "c": "Disk B has greater angular velocity than Disk A",
+          "d": "Both disks have identical rotational kinetic energy"
+        },
+        "correctAnswer": "c",
+        "difficulty": "beginner"
+      }
     ]
 }
