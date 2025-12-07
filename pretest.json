@@ -1,0 +1,118 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the definition of angular momentum?",
+      "answers": {
+        "a": "The tendency of a rotating body to resist changes in its state of motion",
+        "b": "The product of linear velocity and mass",
+        "c": "The product of rotational inertia and angular velocity",
+        "d": "The rate of change of angular velocity"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "According to the conservation of angular momentum, what happens if there is no net external torque acting on a system?",
+      "answers": {
+        "a": "The angular momentum of the system decreases",
+        "b": "The angular momentum of the system increases",
+        "c": "The angular momentum of the system remains constant",
+        "d": "The angular momentum of the system becomes zero"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "How is the total angular momentum of a system calculated?",
+      "answers": {
+        "a": "By summing the linear momenta of all the particles in the system",
+        "b": "By summing the masses of all the particles in the system",
+        "c": "By summing the products of mass and velocity of all the particles in the system",
+        "d": "By summing the individual angular momenta of all the particles in the system"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which equation represents the conservation of angular momentum?",
+      "answers": {
+        "a": "τ=dt / dL",
+        "b": "dt/dL= 0",
+        "c": "L=Iω",
+        "d": "L=mvr"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the purpose of spinning the base disk before conducting the experiment?",
+      "answers": {
+        "a": "To increase friction between the disks",
+        "b": "To decrease the moment of inertia",
+        "c": "To stabilize the system",
+        "d": "To gradually decrease the angular velocity"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What factor might introduce error into the experiment if the dropped object is not centered over the axis of rotation?",
+      "answers": {
+        "a": "Air resistance",
+        "b": "Torque",
+        "c": "Friction",
+        "d": "Moment of inertia"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following is NOT a source of error in Experiment 8?",
+      "answers": {
+        "a": "Off-center dropping of the object",
+        "b": "Friction between the disks",
+        "c": "Alignment of the rotary motion sensor",
+        "d": "Imperfections in the experimental setup"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What parameter is used to determine the percentage difference in angular momentum?",
+      "answers": {
+        "a": "Initial and final angular velocities",
+        "b": "Moment of inertia of the system",
+        "c": "Length of the base disk",
+        "d": "Mass of the dropped object"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+     {
+    "question": "Angular momentum conservation is demonstrated in which of the following scenarios?",
+    "answers": {
+      "a": "A figure skater spinning faster as they pull their arms inward during a spin",
+      "b": "A car accelerating on a straight road",
+      "c": "A ball rolling down an inclined plane",
+      "d": "Water flowing from a faucet"
+    },
+    "correctAnswer": "a",
+    "difficulty": "beginner",
+    "explanation": "When a figure skater pulls their arms inward, their moment of inertia decreases. With no external torque acting, angular momentum must remain constant, so their angular velocity increases, causing faster spinning."
+  },
+  {
+    "question": "Which real-life phenomenon best illustrates conservation of angular momentum?",
+    "answers": {
+      "a": "The formation of hurricanes and tornadoes",
+      "b": "The motion of satellites orbiting Earth",
+      "c": "The trajectory of a thrown baseball",
+      "d": "The oscillation of a pendulum"
+    },
+    "correctAnswer": "a",
+    "difficulty": "beginner",
+    "explanation": "As air masses spiral inward toward the center of a hurricane, the radius decreases. To conserve angular momentum, the rotational speed increases, leading to intense spiraling motion."
+  }
+    
+  ]
+}

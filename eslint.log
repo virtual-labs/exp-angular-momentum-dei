@@ -1,0 +1,41 @@
+
+/home/runner/work/exp-angular-momentum-dei/exp-angular-momentum-dei/experiment/simulation/js/script.js
+     5:7   warning  'slider_mass1' is assigned a value but never used           no-unused-vars
+     6:7   warning  'disc_radius1' is assigned a value but never used           no-unused-vars
+     7:7   warning  'angVelocity' is assigned a value but never used            no-unused-vars
+     8:7   warning  'typeOfObject' is assigned a value but never used           no-unused-vars
+     9:7   warning  'checkbox' is assigned a value but never used               no-unused-vars
+   324:10  warning  'percentageDifference' is defined but never used            no-unused-vars
+   479:10  warning  'play' is defined but never used                            no-unused-vars
+   498:10  warning  'reset' is defined but never used                           no-unused-vars
+   621:10  warning  'drop' is defined but never used                            no-unused-vars
+   716:9   warning  'disc_Mass' is not defined                                  no-undef
+   717:9   warning  'disc_Radius' is not defined                                no-undef
+   718:9   warning  'disc_inertia' is not defined                               no-undef
+   735:9   warning  'ring_Mass' is not defined                                  no-undef
+   736:9   warning  'ring_OuterRadius' is not defined                           no-undef
+   737:9   warning  'ring_InnerRadius' is not defined                           no-undef
+   738:9   warning  'ring_inertia' is not defined                               no-undef
+   904:5   warning  'xBase' is assigned a value but never used                  no-unused-vars
+   905:5   warning  'yBase' is assigned a value but never used                  no-unused-vars
+   916:5   warning  'dropx1' is defined but never used                          no-unused-vars
+   917:5   warning  'dropx2' is defined but never used                          no-unused-vars
+   918:5   warning  'dropy1' is defined but never used                          no-unused-vars
+   919:5   warning  'dropy2' is defined but never used                          no-unused-vars
+   923:10  warning  'drawAngularVelocityGraph' is defined but never used        no-unused-vars
+   979:5   warning  'graphX' is assigned a value but never used                 no-unused-vars
+   980:5   warning  'graphY' is assigned a value but never used                 no-unused-vars
+   982:5   warning  'xAxisOffset' is assigned a value but never used            no-unused-vars
+   983:5   warning  'xIncrement' is assigned a value but never used             no-unused-vars
+   984:5   warning  'yIncrement' is assigned a value but never used             no-unused-vars
+   986:5   warning  'yNumDecimals' is assigned a value but never used           no-unused-vars
+   988:5   warning  'xAxisTitle' is assigned a value but never used             no-unused-vars
+   989:5   warning  'yAxisTitle1' is assigned a value but never used            no-unused-vars
+   990:5   warning  'yAxisTitle_1' is assigned a value but never used           no-unused-vars
+   992:5   warning  'graphTitle1' is assigned a value but never used            no-unused-vars
+  1023:7   warning  'xScale' is assigned a value but never used                 no-unused-vars
+  1024:7   warning  'yScale' is assigned a value but never used                 no-unused-vars
+  1156:7   warning  'resultsTableContainer' is assigned a value but never used  no-unused-vars
+
+✖ 36 problems (0 errors, 36 warnings)
+

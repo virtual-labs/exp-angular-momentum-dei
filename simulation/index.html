@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONSERVATION OF ANGULAR MOMENTUM</title>
+</head>
+
+<body>
+    <div id="parentContainer">
+        <div id="container">
+            <div id="header">
+                <h3>CONSERVATION OF ANGULAR MOMENTUM</h3>
+            </div>
+
+
+
+            <div id="simulation">
+                <div id="leftPane">
+
+                   <div class="control-group" id="mass-base-div">
+                    <span>Mass of Base Disc (kg)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.2" max="1"  id="mass-base" step="0.1" value="0.2"/>
+                        <span id="mass-base-text">0.2</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="radius-base-div">
+                    <span>Radius of Disc (m) </span>
+                    <div class="control-row">
+                        <input type="range" min="0.1" max="0.25"  id="radius-base" step="0.05" value="0.1"/>
+                        <span id="radius-base-text">0.1</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="velocity-base-div">
+                    <span>Angular Velocity of spin (rad/s) </span>
+                    <div class="control-row">
+                        <input type="range" min="20" max="40"  id="velocity-base" step="5" value="20"/>
+                        <span id="velocity-base-text">20</span>
+                    </div>
+                    </div>
+
+                    <div class="typeOfObject">• Select the object</div>
+                    <select id="currentObj" onchange="handleCurrObject()">
+                        <option value="rectangle">Rectangular Bar</option>
+                        <option value="disc">Circular Disc</option>
+                        <option value="ring">Circular Ring</option>
+
+                    </select>
+
+
+                    <div class="control-group" id="mass-object-div">
+                    <span>Mass of Object (kg)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.5" id="mass-object" max="1" step="0.1" value="0.5"/>
+                        <span id="mass-object-text">0.5</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="width-input-div">
+                    <span>Width (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.02" max="0.05" id="width-input" step="0.01" value="0.04"/>
+                        <span id="width-input-text">0.04</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="height-input-div">
+                    <span>Height (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="height-input" step="0.01" value="0.07"/>
+                        <span id="height-input-text">0.07</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="ir-input-div" hidden>
+                    <span>Inner Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.02" max="0.05" id="ir-input" step="0.01" value="0.03"/>
+                        <span id="ir-input-text">0.03</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="or-input-div" hidden>
+                    <span>Outer Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="or-input" step="0.01" value="0.08"/>
+                        <span id="or-input-text">0.08</span>
+                    </div>
+                    </div>
+
+                    <div class="control-group" id="radius-input-div" hidden>
+                    <span>Radius (m)</span>
+                    <div class="control-row">
+                        <input type="range" min="0.07" max="0.1" id="radius-input" step="0.01" value="0.08"/>
+                        <span id="radius-input-text">0.08</span>
+                    </div>
+                    </div>
+                
+
+
+
+                    <div style="display: flex">
+                        <div style="padding-left: 20%;">Lock : </div>
+                        <input type="checkbox" id="lockCheckbox" value="Lock" >
+                    </div>
+
+                    <div><span id="lockPopUp" ></span></div>
+
+
+                </div>
+                <div id="middlePane">
+                    <canvas id="myCanvas" width="350px" height="500px"></canvas>
+                    <canvas id="graphCanvas" width="450px" height="500px"></canvas>
+                </div>
+                <div id="rightPane">
+                    <div class="controls">
+                        <div class="control_heading"><b>Controls:-</b></div>
+                        <div class="play">Release
+                            <button type="play" id="playButton">
+                                <img src="images/play.png" onclick="play()" />
+                            </button>
+                        </div>
+
+
+                        <div class="reset">Reset
+                            <button type="reset" id="resetButton">
+                                <img src="images/reset.png" onclick="reset()" />
+                            </button>
+                        </div>
+
+                        <div class="drop">Drop Object
+                            <button type="drop" id="dropButton" >
+                                <img src="images/drop.png" onclick="drop()" />
+                              
+
+                            </button>
+                        </div>
+                        <span > Time: <span id="stopwatch">00:00:000</span></span>
+                        <div hidden id="warning"> Drop the Object </div>
+                    </div>
+
+                     <!-- <a  id="observation-button" class="button-table1" href="#popup"><span></span>Obervation Table</a> -->
+                     
+
+                     <button hidden id="showObservationsBtn">Show Observations</button>
+                     
+       <button hidden  id="download-graph">Download Graph</button>
+
+                     <div id="resultsModal">
+                        <div class="modal-content">
+                           <!-- Close Button -->
+                           <span id="closeResultsModal" class="close-button">&times;</span>
+                           <!-- Modal Header -->
+                           <h2 class="modal-title">Results and Observations</h2>
+                           <!-- Input Data Container -->
+                           <div id="inputDataContainer" class="input-data-container">
+                              <ul id="inputDataList"></ul>
+                           </div>
+                           <!-- Table Container -->
+                           <div id="resultsTableContainer" class="results-table-container">
+                              <!-- Table will be populated dynamically -->
+                           </div>
+                           <!-- Download Button -->
+                           <button id="download-btn" class="download-button" onclick="downloadResults()">Download Data</button>
+                    </div>
+
+
+
+                    <div id="popup" class="overlay">
+                        <div class="popup">
+                          <h2 style="text-align: center; text-decoration: solid; text-decoration: underline;">Obervation Table </h2>
+                          <a class="close" href="#">&times;</a>
+                          <div class="content">
+                            <b>Object 1 : Base Disc</b>
+                            <br>
+                          Mass of the object <b>M</b>  = <span id="baseDisc_Mass">0</span> kg
+                            <br>
+                            Radius of the base disc <b>R</b>  = <span id="baseDisc_radius">0</span> m
+                            <br>
+                            Mass moment of inertia of the base disc <b>I</b>  = <span id="baseDisc_inertia">0</span> 
+                    <br><br>
+                    
+                    <div id="rectangularPlate_Table" class="hidden">
+                        <b>Object 2 : Rectangular Plate </b>
+                        <br>
+                        Mass of the plate <b>M</b>  = <span id="plate_Mass">0</span> kg
+                        <br>
+                        Length of the plate <b>L</b>  = <span id="plate_Legnth">0</span> cm
+                        <br>
+                        Width of the plate <b>B</b>  = <span id="plate_Width">0</span> cm
+                        <br>
+                        Mass moment of inertia of the plate <b>I</b>  = <span id="plate_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+                    <div id="topDisc_Table" class="hidden">
+                        <b>Object 2 : Top Disc</b>
+                        <br>
+                        Mass of the disc <b>M</b>  = <span id="disc_Mass">0</span> kg
+                        <br>
+                        Radius of the base disc <b>R</b>  = <span id="disc_Radius">0</span> cm
+                        <br>
+                        Mass moment of inertia of the top disc <b>I</b>  = <span id="disc_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+
+                    <div id="annularRing_Table" class="hidden">
+                        <b>Object 2 : Top Disc</b>
+                        <br>
+                        Mass of the annular ring <b>M</b>  = <span id="ring_Mass">0</span> kg
+                        <br>
+                        Outer radius of the annular ring <b>R<sub>o</sub></b>  = <span id="ring_OuterRadius">0</span> cm
+                        <br>
+                        Inner radius of the annular ring<b>R<sub>i</sub></b>  = <span id="ring_InnerRadius">0</span> cm
+                        <br>
+                        Mass moment of inertia of the annular ring <b>I</b>  = <span id="ring_inertia">0</span> m<sup>2</sup>
+               
+                    </div>
+
+                          </div><br>
+                          <table>
+                            <tr>
+                              <th>Initial angular velocity 𝜔<sub>i</sub></th>
+                              <th>Final angular velocity 𝜔<sub>f</sub></th>
+                              <th>Initial angular momentum L<sub>initial</sub></th>
+                              <th>Final angular momentum L<sub>final</sub></th>
+                              <th>Percentage Difference</th>
+                    
+                              
+                            <tr>
+                              <td><span id="initialAngular_Vel">0</span></td>
+                              <td><span id="finalAngular_Vel">0</span></td>
+                              <td><span id="initialAngular_Momentum">0</span></td>
+                              <td><span id="initialAngular_Momentum">0</span></td>
+                              <td><span id="percentage_difference">0</span></td>
+                            </tr>
+                    
+                            </tr>
+                          </table><br>
+                    
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+        <div id="copyright"
+    title="Developer : Harsh Pathak and Aysha,Subject Expertise : Mr.Jinshad.U, Dayalbagh Educational Instiute,Agra ">
+  </div>
+  <div id="Developer_information" title="Developer Name:
+               1.Harsh Pathak
+                 (06hpathak@gmail.com)
+               2.Aysha
+                 (satsangiaysha@gmail.com)
+  Subject Expertise : Mr.Jinshad.U
+  Instiute Name: Dayalbagh Educational Instiute, Agra">
+  </div>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+
+</html>
