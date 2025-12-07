@@ -88,6 +88,31 @@
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
-    }
+    },
+     {
+    "question": "Angular momentum conservation is demonstrated in which of the following scenarios?",
+    "answers": {
+      "a": "A figure skater spinning faster as they pull their arms inward during a spin",
+      "b": "A car accelerating on a straight road",
+      "c": "A ball rolling down an inclined plane",
+      "d": "Water flowing from a faucet"
+    },
+    "correctAnswer": "a",
+    "difficulty": "beginner",
+    "explanation": "When a figure skater pulls their arms inward, their moment of inertia decreases. With no external torque acting, angular momentum must remain constant, so their angular velocity increases, causing faster spinning."
+  },
+  {
+    "question": "Which real-life phenomenon best illustrates conservation of angular momentum?",
+    "answers": {
+      "a": "The formation of hurricanes and tornadoes",
+      "b": "The motion of satellites orbiting Earth",
+      "c": "The trajectory of a thrown baseball",
+      "d": "The oscillation of a pendulum"
+    },
+    "correctAnswer": "a",
+    "difficulty": "beginner",
+    "explanation": "As air masses spiral inward toward the center of a hurricane, the radius decreases. To conserve angular momentum, the rotational speed increases, leading to intense spiraling motion."
+  }
+    
   ]
 }
