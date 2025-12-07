@@ -1,55 +1,126 @@
-# THEORY
-This experiment is devised to familiarize with the concept of angular momentum and to validate the law of
-conservation of angular momentum.
-## Angular Momentum
-The angular momentum, L, of a particle with a mass m and a linear velocity 𝑣⃗ concerning a fixed point,
-typically the origin is given as
+## THEORY
 
-<img align="centre"  src="images/t1.png">
+This experiment is designed to familiarize students with the concept of angular momentum and to validate the law of conservation of angular momentum.
 
-The 𝑟⃗ term is once again the position vector locating the particle relative to a fixed point. If we have a system
-of N particles, each with position vector rl and each having momentum pl, then the total angular momentum
-of the system of particles about the fixed point is the vector sum of the individual angular momenta
+### Symbols and Notation
 
-<img align="centre"  src="images/t2.png">
+Before proceeding with the theory, the following symbols and their definitions are explicitly defined:
 
-To develop the angular momentum of a rigid body, we model a rigid body as being made up of a system of
-particles, with mass mi that undergo the same rotational motion about the point. The net angular momentum
-of the rigid body along the axis of rotation is
+| Symbol | Definition | Units |
+|--------|------------|-------|
+| $\overrightarrow{L}$ | Angular momentum vector | kg·m²/s |
+| $\overrightarrow{r}$ | Position vector from reference point to particle | m |
+| $\overrightarrow{v}$ | Linear velocity of particle | m/s |
+| $\overrightarrow{p}$ | Linear momentum of particle | kg·m/s |
+| $m$ | Mass of particle | kg |
+| $N$ | Total number of particles in system | --- |
+| $\omega$ | Angular velocity of rotation | rad/s |
+| $I$ | Moment of inertia about axis of rotation | kg·m² |
+| $\tau$ | Torque (rotational force) | N·m |
+| $t$ | Time | s |
 
-<img align="centre"  src="images/t3.png">
+### Angular Momentum of a Particle
 
- If the angular velocity of rotation is 
-  
-<img align="centre"  src="images/t4.png">
+The angular momentum, $\overrightarrow{L}$, of a particle with mass $m$ and linear velocity $\overrightarrow{v}$ with respect to a fixed reference point (typically the origin) is defined as:
 
-The summation Σi 𝑚iri^2 is simply the moment of inertia I of the rigid body about the axis of rotation. Thus,
-the magnitude of the angular momentum along the axis of rotation of a rigid body rotating with angular
-velocity ω about the axis is
+$$\overrightarrow{L} = \overrightarrow{r} \times \overrightarrow{p} = \overrightarrow{r} \times (m\overrightarrow{v})$$
 
-<img align="centre"  src="images/t5.png">
+where:
+- $\overrightarrow{r}$ is the **position vector** locating the particle relative to the fixed reference point
+- $\overrightarrow{v}$ is the **linear velocity** of the particle
+- $m$ is the **mass** of the particle
 
-## Conservation of Angular Momentum
-Similar to translational motion, we can write Newton’s second law in angular form, that is in terms of torque
-and angular momentum as
+### Angular Momentum of a System of Particles
 
-<img align="centre"  src="images/t6.png">
+For a system of $N$ particles, each with position vector $\vec{r}_i$ and linear momentum $\vec{p}_i$, the total angular momentum about the fixed reference point is the vector sum of individual angular momenta:
 
-The angular momentum of a system of particles around a point in a fixed inertial reference frame is conserved
-if there is no net external torque around that point:
+$${\overrightarrow{L}}_{\text{total}} = {\overrightarrow{L}}_{1} + {\overrightarrow{L}}_{2} + \cdots + {\overrightarrow{L}}_{N} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i}$$
 
-<img align="centre"  src="images/t7.png">
+### Angular Momentum of a Rigid Body
 
-Note that the total angular momentum L is conserved. Any of the individual angular momenta can change as
-long as their sum remains constant.
+To develop the angular momentum expression for a rigid body, we model it as a system of particles with mass $m_{i}$ that undergo identical rotational motion about a fixed axis. The net angular momentum along the axis of rotation is:
 
-## Experimental Setup
-The experiment involves a bottom solid disc that can rotate about a vertical spindle. A rotary motion
-sensor under the disc’s angular velocity. This bottom disk is given a spin and the other objects are carefully
-dropped on top of it, resulting in a change of the angular velocity. The system's initial and final angular velocities can be used to validate the principle of conservation of angular momentum. If 𝜔􀯜 and 𝜔􀯙 are the
-angular velocities just before and after the drop respectively, the initial and final angular momentum are given
-as
-<img align="centre"  src="images/t8.png">
+$$\overrightarrow{L} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i} = \sum_{i = 1}^{N}(m_{i} \times ({\overrightarrow{r}}_{i} \times {\overrightarrow{v}}_{i}))$$
 
-<img align="centre"  src="images/t9.png">
+For rotational motion, the relationship between linear velocity and angular velocity is:
 
+$${\overrightarrow{v}}_{i} = \overrightarrow{\omega} \times {\overrightarrow{r}}_{i}$$
+
+Substituting this into the angular momentum equation:
+
+$$\overrightarrow{L} = \sum_{i = 1}^{N} m_{i} \times \{{\overrightarrow{r}}_{i} \times (\overrightarrow{\omega} \times {\overrightarrow{r}}_{i})\}$$
+
+Using vector algebra, this simplifies to:
+
+$$\overrightarrow{L} = \overrightarrow{\omega}\sum_{i = 1}^{N} m_{i}r_{i}^{2}$$
+
+### Moment of Inertia
+
+The **moment of inertia**, $I$, of a rigid body about the axis of rotation is defined as:
+
+$$I = \sum_{i = 1}^{N} m_{i}r_{i}^{2}$$
+
+This represents the rotational equivalent of mass in translational motion.
+
+### Angular Momentum of Rotating Rigid Body
+
+Using the definition of moment of inertia, the magnitude of angular momentum along the axis of rotation for a rigid body rotating with angular velocity $\omega$ is:
+
+$$L = I\omega$$
+
+<div align="center">
+<img src="images/t5.png" style="max-width:100%; height:auto;">
+</div>
+
+### Conservation of Angular Momentum
+
+Newton's second law in angular form relates torque and angular momentum:
+
+$$\overrightarrow{\tau} = \frac{d\overrightarrow{L}}{dt}$$
+
+The angular momentum of a system of particles around a point in a fixed inertial reference frame is **conserved** (remains constant) if there is no net external torque around that point:
+
+$$\frac{d\overrightarrow{L}}{dt} = 0 \Longrightarrow {\overrightarrow{L}}_{\text{total}} = \text{constant}$$
+
+This means:
+
+$${\overrightarrow{L}}_{1} + {\overrightarrow{L}}_{2} + \cdots + {\overrightarrow{L}}_{N} = \text{constant}$$
+
+Note that the **total angular momentum L is conserved**. Individual angular momenta may change, provided their sum remains constant.
+
+### Experimental Setup
+
+The experiment uses a base solid disk that is free to rotate about a vertical spindle. A rotary motion sensor records the disk's angular velocity. The base disk is spun and another object (disk, ring, or plate) is carefully dropped onto it, resulting in a change of angular velocity. The initial and final angular velocities are used to validate conservation of angular momentum.
+
+If $\omega_{i}$ and $\omega_{f}$ denote the angular velocities just before and after the drop respectively, the initial and final angular momenta are:
+
+**Initial angular momentum** (base disk only):
+
+$$L_{\text{initial}} = I_{\text{base}}\omega_{i}$$
+
+**Final angular momentum** (base disk + dropped object combined):
+
+$$L_{\text{final}} = (I_{\text{base}} + I_{\text{dropped}})\omega_{f}$$
+
+According to conservation of angular momentum:
+
+$$L_{\text{initial}} = L_{\text{final}}$$
+
+$$I_{\text{base}}\omega_{i} = (I_{\text{base}} + I_{\text{dropped}})\omega_{f}$$
+
+<div align="center">
+<img src="images/t9.png" style="max-width:100%; height:auto;">
+</div>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
