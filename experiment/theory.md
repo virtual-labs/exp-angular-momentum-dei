@@ -8,10 +8,10 @@ Before proceeding with the theory, the following symbols and their definitions a
 
 | Symbol | Definition | Units |
 |--------|------------|-------|
-| $\overrightarrow{L}$ | Angular momentum vector | kg·m²/s |
-| $\overrightarrow{r}$ | Position vector from reference point to particle | m |
-| $\overrightarrow{v}$ | Linear velocity of particle | m/s |
-| $\overrightarrow{p}$ | Linear momentum of particle | kg·m/s |
+| $\vec{L}$ | Angular momentum vector | kg·m²/s |
+| $\vec{r}$ | Position vector from reference point to particle | m |
+| $\vec{v}$ | Linear velocity of particle | m/s |
+| $\vec{p}$ | Linear momentum of particle | kg·m/s |
 | $m$ | Mass of particle | kg |
 | $N$ | Total number of particles in system | --- |
 | $\omega$ | Angular velocity of rotation | rad/s |
@@ -21,44 +21,44 @@ Before proceeding with the theory, the following symbols and their definitions a
 
 ### Angular Momentum of a Particle
 
-The angular momentum, $\overrightarrow{L}$, of a particle with mass $m$ and linear velocity $\overrightarrow{v}$ with respect to a fixed reference point (typically the origin) is defined as:
+The angular momentum, $\vec{L}$, of a particle with mass $m$ and linear velocity $\vec{v}$ with respect to a fixed reference point (typically the origin) is defined as:
 
-$$\overrightarrow{L} = \overrightarrow{r} \times \overrightarrow{p} = \overrightarrow{r} \times (m\overrightarrow{v})$$
+$$\vec{L} = \vec{r} \times \vec{p} = \vec{r} \times (m\vec{v})$$
 
 where:
-- $\overrightarrow{r}$ is the **position vector** locating the particle relative to the fixed reference point
-- $\overrightarrow{v}$ is the **linear velocity** of the particle
+- $\vec{r}$ is the **position vector** locating the particle relative to the fixed reference point
+- $\vec{v}$ is the **linear velocity** of the particle
 - $m$ is the **mass** of the particle
 
 ### Angular Momentum of a System of Particles
 
 For a system of $N$ particles, each with position vector $\vec{r}_i$ and linear momentum $\vec{p}_i$, the total angular momentum about the fixed reference point is the vector sum of individual angular momenta:
 
-$${\overrightarrow{L}}_{\text{total}} = {\overrightarrow{L}}_{1} + {\overrightarrow{L}}_{2} + \cdots + {\overrightarrow{L}}_{N} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i}$$
+$$\vec{L}_{\text{total}} = \vec{L}_1 + \vec{L}_2 + \cdots + \vec{L}_N = \sum_{i = 1}^{N} \vec{L}_i$$
 
 ### Angular Momentum of a Rigid Body
 
 To develop the angular momentum expression for a rigid body, we model it as a system of particles with mass $m_i$ that undergo identical rotational motion about a fixed axis. The net angular momentum along the axis of rotation is:
 
-$$\overrightarrow{L} = \sum_{i = 1}^{N}{\overrightarrow{L}}_{i} = \sum_{i = 1}^{N}(m_{i} \times (\vec{r}_{i} \times \vec{v}_{i}))$$
+$$\vec{L} = \sum_{i = 1}^{N} \vec{L}_i = \sum_{i = 1}^{N} \left[ m_i (\vec{r}_i \times \vec{v}_i) \right]$$
 
 For rotational motion, the relationship between linear velocity and angular velocity is:
 
-$$\vec{v}_{i} = \overrightarrow{\omega} \times \vec{r}_{i}$$
+$$\vec{v}_i = \vec{\omega} \times \vec{r}_i$$
 
 Substituting this into the angular momentum equation:
 
-$$\overrightarrow{L} = \sum_{i = 1}^{N} m_{i} \times \{\vec{r}_{i} \times (\overrightarrow{\omega} \times \vec{r}_{i})\}$$
+$$\vec{L} = \sum_{i = 1}^{N} m_i \left[ \vec{r}_i \times (\vec{\omega} \times \vec{r}_i) \right]$$
 
 Using vector algebra, this simplifies to:
 
-$$\overrightarrow{L} = \overrightarrow{\omega}\sum_{i = 1}^{N} m_{i}r_{i}^{2}$$
+$$\vec{L} = \vec{\omega} \sum_{i = 1}^{N} m_i r_i^2$$
 
 ### Moment of Inertia
 
 The **moment of inertia**, $I$, of a rigid body about the axis of rotation is defined as:
 
-$$I = \sum_{i = 1}^{N} m_{i}r_{i}^{2}$$
+$$I = \sum_{i = 1}^{N} m_i r_i^2$$
 
 This represents the rotational equivalent of mass in translational motion.
 
@@ -76,15 +76,15 @@ $$L = I\omega$$
 
 Newton's second law in angular form relates torque and angular momentum:
 
-$$\overrightarrow{\tau} = \frac{d\overrightarrow{L}}{dt}$$
+$$\vec{\tau} = \frac{d\vec{L}}{dt}$$
 
 The angular momentum of a system of particles around a point in a fixed inertial reference frame is **conserved** (remains constant) if there is no net external torque around that point:
 
-$$\frac{d\overrightarrow{L}}{dt} = 0 \Longrightarrow {\overrightarrow{L}}_{\text{total}} = \text{constant}$$
+$$\frac{d\vec{L}}{dt} = 0 \quad \Longrightarrow \quad \vec{L}_{\text{total}} = \text{constant}$$
 
 This means:
 
-$${\overrightarrow{L}}_{1} + {\overrightarrow{L}}_{2} + \cdots + {\overrightarrow{L}}_{N} = \text{constant}$$
+$$\vec{L}_1 + \vec{L}_2 + \cdots + \vec{L}_N = \text{constant}$$
 
 Note that the **total angular momentum L is conserved**. Individual angular momenta may change, provided their sum remains constant.
 
@@ -96,17 +96,17 @@ If $\omega_i$ and $\omega_f$ denote the angular velocities just before and after
 
 **Initial angular momentum** (base disk only):
 
-$$L_{\text{initial}} = I_{\text{base}}\omega_i$$
+$$L_{\text{initial}} = I_{\text{base}} \cdot \omega_i$$
 
 **Final angular momentum** (base disk + dropped object combined):
 
-$$L_{\text{final}} = (I_{\text{base}} + I_{\text{dropped}})\omega_f$$
+$$L_{\text{final}} = (I_{\text{base}} + I_{\text{dropped}}) \cdot \omega_f$$
 
 According to conservation of angular momentum:
 
 $$L_{\text{initial}} = L_{\text{final}}$$
 
-$$I_{\text{base}}\omega_i = (I_{\text{base}} + I_{\text{dropped}})\omega_f$$
+$$I_{\text{base}} \cdot \omega_i = (I_{\text{base}} + I_{\text{dropped}}) \cdot \omega_f$$
 
 <div align="center">
 <img src="images/t9.png" style="max-width:100%; height:auto;">
@@ -123,4 +123,4 @@ MathJax = {
   }
 };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
